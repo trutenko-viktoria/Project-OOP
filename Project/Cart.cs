@@ -79,6 +79,18 @@ namespace Project
             Console.WriteLine($"Загальна вартість корзини: {totalPrice}");
         }
 
+        // 3 версія
+        public bool IsEmpty()
+        {
+            return products.Count == 0;
+        }
+
+        public bool HasExpensiveTotal()
+        {
+            return totalPrice > 20000;
+        }
+        //
+
         public void ShowCartInfo()
         {
             Console.WriteLine($"Кількість товарів у корзині: {products.Count}");

@@ -70,6 +70,18 @@ namespace Project
             Console.WriteLine("Доставка здійснюється");
         }
 
+        // 3 версія
+        public bool IsDelivered()
+        {
+            return status == "доставляється";
+        }
+
+        public bool HasAddress()
+        {
+            return address != "Адреса не вказана";
+        }
+       //
+
         public void ShowDeliveryInfo()
         {
             Console.WriteLine($"Адреса доставки: {address}");

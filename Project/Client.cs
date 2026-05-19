@@ -86,6 +86,18 @@ namespace Project
             Console.WriteLine($"Клієнт {fullName} оформив замовлення");
         }
 
+        //3 версія
+        public bool HasCart()
+        {
+            return cart != null;
+        }
+
+        public bool HasPhoneNumber()
+        {
+            return phoneNumber != "Не вказано";
+        }
+        //
+
         public void ShowClientInfo()
         {
             Console.WriteLine($"Клієнт: {fullName}");

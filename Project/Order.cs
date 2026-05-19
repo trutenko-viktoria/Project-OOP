@@ -80,6 +80,18 @@ namespace Project
             Console.WriteLine($"Замовлення №{orderNumber} скомпоновано");
         }
 
+        //3 версія
+        public bool IsPaidOrder()
+        {
+            return payment.IsPaid;
+        }
+
+        public bool HasDelivery()
+        {
+            return delivery != null;
+        }
+        //
+
         public void ShowOrderInfo()
         {
             Console.WriteLine($"Номер замовлення: {orderNumber}");

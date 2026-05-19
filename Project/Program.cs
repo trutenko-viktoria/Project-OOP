@@ -89,6 +89,11 @@ namespace Project
             delivery2.Deliver();
             delivery2.ShowDeliveryInfo();
 
+            //3 версія
+            Console.WriteLine($"Доставка активна: {delivery2.IsDelivered()}");
+            Console.WriteLine($"Адресу вказано: {delivery2.HasAddress()}");
+            //
+
             Console.WriteLine();
 
             Delivery delivery3 = new Delivery(delivery2);
@@ -116,6 +121,11 @@ namespace Project
             manager2.ReplaceProduct();
             manager2.ShowManagerInfo();
 
+            // 3 версія
+            Console.WriteLine($"Менеджер має оброблені замовлення: {manager2.HasProcessedOrders()}");
+            Console.WriteLine($"Менеджер досвідчений: {manager2.IsExperiencedManager()}");
+            //
+
             Console.WriteLine();
 
             Manager manager3 = new Manager(manager2);
@@ -141,6 +151,11 @@ namespace Project
             cart1.AddProduct(new Product("Мишка", 500, 2));
             cart1.CalculateTotalPrice();
             cart1.ShowCartInfo();
+
+            // 3 версія
+            Console.WriteLine($"Корзина порожня: {cart1.IsEmpty()}");
+            Console.WriteLine($"Корзина має велику суму: {cart1.HasExpensiveTotal()}");
+            //
 
             Console.WriteLine();
 
@@ -182,6 +197,11 @@ namespace Project
             client2.Cart.CalculateTotalPrice();
             client2.MakeOrder();
 
+            //3 версія
+            Console.WriteLine($"Клієнт має корзину: {client2.HasCart()}");
+            Console.WriteLine($"Клієнт вказав номер телефону: {client2.HasPhoneNumber()}");
+            //
+
             Console.WriteLine();
 
             Client client3 = new Client(client2);
@@ -210,6 +230,11 @@ namespace Project
             order2.ShowOrderInfo();
             order2.RegisterOrder();
             order2.CompleteOrder();
+
+            //3 версія
+            Console.WriteLine($"Замовлення оплачене: {order2.IsPaidOrder()}");
+            Console.WriteLine($"Замовлення має доставку: {order2.HasDelivery()}");
+            //
 
             Console.WriteLine();
 
@@ -245,6 +270,11 @@ namespace Project
 
             store2.OpenStore();
             store2.ShowStoreInfo();
+
+            //3 версія
+            Console.WriteLine($"Магазин має товари: {store2.HasProducts()}");
+            Console.WriteLine($"Магазин має замовлення: {store2.HasOrders()}");
+            //
 
             Console.WriteLine();
 

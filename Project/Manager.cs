@@ -75,6 +75,18 @@ namespace Project
             Console.WriteLine("Менеджер узгоджує заміну товару з клієнтом");
         }
 
+        //3 версія
+        public bool HasProcessedOrders()
+        {
+            return processedOrdersCount > 0;
+        }
+
+        public bool IsExperiencedManager()
+        {
+            return processedOrdersCount >= 5;
+        }
+        //
+
         public void ShowManagerInfo()
         {
             Console.WriteLine($"Менеджер: {managerName}");

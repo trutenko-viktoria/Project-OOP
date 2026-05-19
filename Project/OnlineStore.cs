@@ -91,6 +91,19 @@ namespace Project
             Console.WriteLine("Замовлення додано до системи");
         }
 
+        //3 версія
+        public bool HasProducts()
+        {
+            return products.Count > 0;
+        }
+
+        public bool HasOrders()
+        {
+            return orders.Count > 0;
+        }
+        //
+
+
         public void ShowStoreInfo()
         {
             Console.WriteLine($"Кількість товарів: {products.Count}");
