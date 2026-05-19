@@ -16,10 +16,37 @@ namespace Project
             Console.WriteLine("Курс: 1");
             Console.WriteLine("Група: ІПЗ-11");
             Console.WriteLine("Варіант: 45");
-            Console.WriteLine("Версія 1");
+            Console.WriteLine("Версія 3");
             Console.WriteLine("Старт імітації");
 
+            //============================================
+            Console.WriteLine("----- Перевірка класу Product -----");
+
+            Product product1 = new Product();
+            product1.ShowProductInfo();
+
+            Console.WriteLine();
+
+            Product product2 = new Product("Ноутбук", 25000, 5);
+            product2.ShowProductInfo();
+
+            Console.WriteLine($"Товар є в наявності: {product2.IsAvailable()}");
+            Console.WriteLine($"Товар дорогий: {product2.IsExpensive()}");
+
+            Console.WriteLine();
+
+            Product product3 = new Product(product2);
+            product3.ShowProductInfo();
+
+            Console.WriteLine();
+
+            Product product4 = new Product("Смартфон");
+            product4.ShowProductInfo();
+
+            Console.WriteLine();
+
             //======================================
+
             Console.WriteLine("----- Перевірка класу Payment -----");
 
             Payment payment1 = new Payment();

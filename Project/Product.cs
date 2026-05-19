@@ -65,13 +65,6 @@ namespace Project
             Console.WriteLine("Конструктор з викликом іншого конструктора Product");
         }
 
-        public void ShowProductInfo()
-        {
-            Console.WriteLine($"Товар: {name}");
-            Console.WriteLine($"Ціна: {price}");
-            Console.WriteLine($"Кількість: {quantity}");
-        }
-
         public Product()
         {
             name = "Невідомий товар";
@@ -80,5 +73,24 @@ namespace Project
 
             Console.WriteLine("Конструктор без параметрів Product");
         }
+
+        public void ShowProductInfo()
+        {
+            Console.WriteLine($"Товар: {name}");
+            Console.WriteLine($"Ціна: {price}");
+            Console.WriteLine($"Кількість: {quantity}");
+        }
+
+        //3 версія
+        public bool IsAvailable()
+        {
+            return quantity > 0;
+        }
+
+        public bool IsExpensive()
+        {
+            return price > 10000;
+        }
+
     }
 }
