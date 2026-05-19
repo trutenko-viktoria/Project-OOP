@@ -70,6 +70,18 @@ namespace Project
             Console.WriteLine("Товар оплачено");
         }
 
+        //3 версія 
+        public bool IsPaymentCompleted()
+        {
+            return isPaid;
+        }
+
+        public bool IsLargePayment()
+        {
+            return amount > 20000;
+        }
+        //
+
         public void ShowPaymentInfo()
         {
             Console.WriteLine($"Сума оплати: {amount}");

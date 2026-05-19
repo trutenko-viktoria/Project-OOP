@@ -59,6 +59,11 @@ namespace Project
             payment2.Pay();
             payment2.ShowPaymentInfo();
 
+            //3 версія
+            Console.WriteLine($"Оплата виконана: {payment2.IsPaymentCompleted()}");
+            Console.WriteLine($"Велика сума оплати: {payment2.IsLargePayment()}");
+            // 
+
             Console.WriteLine();
 
             Payment payment3 = new Payment(payment2);
