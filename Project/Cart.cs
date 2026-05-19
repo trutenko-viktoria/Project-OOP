@@ -91,6 +91,20 @@ namespace Project
         }
         //
 
+        //3 версія - методи сценарію
+        public bool CanCreateOrder()
+        {
+            if (IsEmpty())
+            {
+                Console.WriteLine("Замовлення неможливо оформити, бо корзина порожня");
+                return false;
+            }
+
+            Console.WriteLine("Корзина не порожня, замовлення можна оформити");
+            return true;
+        }
+        //
+
         public void ShowCartInfo()
         {
             Console.WriteLine($"Кількість товарів у корзині: {products.Count}");

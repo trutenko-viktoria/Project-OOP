@@ -92,6 +92,7 @@ namespace Project
         }
 
         //3 версія
+        //Предикатні методи
         public bool HasProducts()
         {
             return products.Count > 0;
@@ -101,7 +102,36 @@ namespace Project
         {
             return orders.Count > 0;
         }
+
+        //Методи сценарію
+
+        public Product FindProductByName(string productName)
+        {
+            foreach (Product product in products)
+            {
+                if (product.Name == productName)
+                {
+                    return product;
+                }
+            }
+
+            return null;
+        }
+
+        public void RegisterOrder(Order order)
+        {
+            if (order != null)
+            {
+                orders.Add(order);
+                Console.WriteLine("Замовлення зареєстровано в системі магазину");
+            }
+            else
+            {
+                Console.WriteLine("Замовлення не створено");
+            }
+        }
         //
+
 
 
         public void ShowStoreInfo()

@@ -59,6 +59,10 @@ namespace Project
             payment2.Pay();
             payment2.ShowPaymentInfo();
 
+            //3 версія - сценарію
+            payment2.CancelPayment();
+            payment2.ShowPaymentInfo();
+
             //3 версія
             Console.WriteLine($"Оплата виконана: {payment2.IsPaymentCompleted()}");
             Console.WriteLine($"Велика сума оплати: {payment2.IsLargePayment()}");
@@ -89,7 +93,11 @@ namespace Project
             delivery2.Deliver();
             delivery2.ShowDeliveryInfo();
 
-            //3 версія
+            //3 версія - сценарію
+            delivery2.CompleteDelivery();
+            delivery2.ShowDeliveryInfo();
+
+            //3 версія - булеві
             Console.WriteLine($"Доставка активна: {delivery2.IsDelivered()}");
             Console.WriteLine($"Адресу вказано: {delivery2.HasAddress()}");
             //
@@ -176,6 +184,10 @@ namespace Project
             cart4.CalculateTotalPrice();
             cart4.ShowCartInfo();
 
+            //3 версія
+            cart1.CanCreateOrder();
+            //
+
             Console.WriteLine();
 
             //===========================================
@@ -231,7 +243,9 @@ namespace Project
             order2.RegisterOrder();
             order2.CompleteOrder();
 
-            //3 версія
+            //3 версія - метод сценарію
+            order2.ConfirmOrder();
+            //3 версія - булеві методи
             Console.WriteLine($"Замовлення оплачене: {order2.IsPaidOrder()}");
             Console.WriteLine($"Замовлення має доставку: {order2.HasDelivery()}");
             //
@@ -271,7 +285,9 @@ namespace Project
             store2.OpenStore();
             store2.ShowStoreInfo();
 
-            //3 версія
+            //3 версія - методи сценарію
+            storeManager.CheckStoreOrders(store2);
+            //3 версія - булеві методи
             Console.WriteLine($"Магазин має товари: {store2.HasProducts()}");
             Console.WriteLine($"Магазин має замовлення: {store2.HasOrders()}");
             //
@@ -280,6 +296,30 @@ namespace Project
 
             store2.AddProduct(new Product("Вебкамера", 2500, 1));
             store2.AddOrder(new Order(303));
+
+            // 3 версія
+            Console.WriteLine("----- Сценарій пошуку товару -----");
+
+            Product foundProduct = store2.FindProductByName("Монітор");
+
+            if (foundProduct != null)
+            {
+                Console.WriteLine("Товар знайдено:");
+                foundProduct.ShowProductInfo();
+            }
+            else
+            {
+                Console.WriteLine("Товар не знайдено");
+            }
+
+            Console.WriteLine();
+
+            Console.WriteLine("----- Сценарій реєстрації замовлення -----");
+
+            Order newOrder = new Order(404);
+            store2.RegisterOrder(newOrder);
+            store2.ShowStoreInfo();
+            //
 
             Console.WriteLine();
 

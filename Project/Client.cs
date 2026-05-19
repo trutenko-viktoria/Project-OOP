@@ -75,18 +75,36 @@ namespace Project
             Console.WriteLine($"Клієнт {fullName} зареєструвався");
         }
 
+        //3 версія - покращення даного методу сцеенарію у зв'язку з покращенням класу Product
         public void AddToCart(Product product)
         {
-            cart.AddProduct(product);
-            Console.WriteLine($"Клієнт {fullName} додав товар у корзину");
+            if (product.CanBeAddedToCart())
+            {
+                cart.AddProduct(product);
+                Console.WriteLine($"Клієнт {fullName} додав товар у корзину");
+            }
+            else
+            {
+                Console.WriteLine($"Клієнт {fullName} не зміг додати товар");
+            }
         }
+        //
+        //3 версія - методи сценарію
 
         public void MakeOrder()
         {
-            Console.WriteLine($"Клієнт {fullName} оформив замовлення");
+            if (cart.CanCreateOrder())
+            {
+                Console.WriteLine($"Клієнт {fullName} оформив замовлення");
+            }
+            else
+            {
+                Console.WriteLine($"Клієнт {fullName} не може оформити замовлення");
+            }
         }
+        // зміни в мейн не додаю, бо він там вже є, наразі я просто його покращую
 
-        //3 версія
+        //3 версія - булеві
         public bool HasCart()
         {
             return cart != null;

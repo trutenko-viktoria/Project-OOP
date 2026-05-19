@@ -70,7 +70,7 @@ namespace Project
             Console.WriteLine("Доставка здійснюється");
         }
 
-        // 3 версія
+        // 3 версія булеві
         public bool IsDelivered()
         {
             return status == "доставляється";
@@ -80,7 +80,13 @@ namespace Project
         {
             return address != "Адреса не вказана";
         }
-       //
+        //3 версія - сценарію
+        public void CompleteDelivery()
+        {
+            status = "доставлено";
+            Console.WriteLine("Доставку завершено");
+        }
+        //
 
         public void ShowDeliveryInfo()
         {

@@ -70,7 +70,7 @@ namespace Project
             Console.WriteLine("Товар оплачено");
         }
 
-        //3 версія 
+        //3 версія - булеві 
         public bool IsPaymentCompleted()
         {
             return isPaid;
@@ -79,6 +79,19 @@ namespace Project
         public bool IsLargePayment()
         {
             return amount > 20000;
+        }
+        //3 версія - сценарію
+        public void CancelPayment()
+        {
+            if (isPaid)
+            {
+                isPaid = false;
+                Console.WriteLine("Оплату скасовано");
+            }
+            else
+            {
+                Console.WriteLine("Оплата ще не була виконана");
+            }
         }
         //
 

@@ -74,14 +74,7 @@ namespace Project
             Console.WriteLine("Конструктор без параметрів Product");
         }
 
-        public void ShowProductInfo()
-        {
-            Console.WriteLine($"Товар: {name}");
-            Console.WriteLine($"Ціна: {price}");
-            Console.WriteLine($"Кількість: {quantity}");
-        }
-
-        //3 версія
+        //3 версія - булефі функції
         public bool IsAvailable()
         {
             return quantity > 0;
@@ -91,6 +84,25 @@ namespace Project
         {
             return price > 10000;
         }
+        //3 версія - методи сценарію
+        public bool CanBeAddedToCart()
+        {
+            if (IsAvailable())
+            {
+                Console.WriteLine("Товар є в наявності");
+                return true;
+            }
 
+            Console.WriteLine("Товар відсутній");
+            return false;
+        }
+        //
+
+        public void ShowProductInfo()
+        {
+            Console.WriteLine($"Товар: {name}");
+            Console.WriteLine($"Ціна: {price}");
+            Console.WriteLine($"Кількість: {quantity}");
+        }
     }
 }

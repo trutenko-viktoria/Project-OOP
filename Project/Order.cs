@@ -80,7 +80,7 @@ namespace Project
             Console.WriteLine($"Замовлення №{orderNumber} скомпоновано");
         }
 
-        //3 версія
+        //3 версія - булеві
         public bool IsPaidOrder()
         {
             return payment.IsPaid;
@@ -89,6 +89,18 @@ namespace Project
         public bool HasDelivery()
         {
             return delivery != null;
+        }
+        //3 версія - методи сценарію
+        public void ConfirmOrder()
+        {
+            if (IsPaidOrder() && HasDelivery())
+            {
+                Console.WriteLine($"Замовлення №{orderNumber} підтверджено");
+            }
+            else
+            {
+                Console.WriteLine($"Замовлення №{orderNumber} не можна підтвердити");
+            }
         }
         //
 

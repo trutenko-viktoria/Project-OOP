@@ -75,7 +75,7 @@ namespace Project
             Console.WriteLine("Менеджер узгоджує заміну товару з клієнтом");
         }
 
-        //3 версія
+        //3 версія - булеві
         public bool HasProcessedOrders()
         {
             return processedOrdersCount > 0;
@@ -84,6 +84,18 @@ namespace Project
         public bool IsExperiencedManager()
         {
             return processedOrdersCount >= 5;
+        }
+        //3 версія - методи сценарію
+        public void CheckStoreOrders(OnlineStore store)
+        {
+            if (store.HasOrders())
+            {
+                Console.WriteLine("Менеджер перевірив замовлення магазину");
+            }
+            else
+            {
+                Console.WriteLine("У магазині немає замовлень");
+            }
         }
         //
 
