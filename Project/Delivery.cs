@@ -11,9 +11,70 @@ namespace Project
         private string address;
         private string status;
 
+        public string Address
+        {
+            get { return address; }
+            set { address = value; }
+        }
+
+        public string Status
+        {
+            get { return status; }
+            private set { status = value; }
+        }
+
+        static Delivery()
+        {
+            Console.WriteLine("Статичний конструктор Delivery");
+        }
+
+        private Delivery(bool isHidden)
+        {
+            Console.WriteLine("Закритий конструктор Delivery");
+        }
+
+        public Delivery()
+        {
+            address = "Адреса не вказана";
+            status = "не оформлена";
+
+            Console.WriteLine("Конструктор без параметрів Delivery");
+        }
+
+        public Delivery(string address, string status)
+        {
+            this.address = address;
+            this.status = status;
+
+            Console.WriteLine("Конструктор з параметрами Delivery");
+        }
+
+        public Delivery(Delivery other)
+        {
+            address = other.address;
+            status = other.status;
+
+            Console.WriteLine("Конструктор копіювання Delivery");
+        }
+
+        public Delivery(string address) : this()
+        {
+            this.address = address;
+
+            Console.WriteLine("Конструктор з викликом іншого конструктора Delivery");
+        }
+
         public void Deliver()
         {
+            status = "доставляється";
             Console.WriteLine("Доставка здійснюється");
         }
+
+        public void ShowDeliveryInfo()
+        {
+            Console.WriteLine($"Адреса доставки: {address}");
+            Console.WriteLine($"Статус доставки: {status}");
+        }
+
     }
 }

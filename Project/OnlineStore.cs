@@ -12,14 +12,91 @@ namespace Project
         private List<Order> orders;
         private Manager manager;
 
-        public void OpenStore()
+        public List<Product> Products
         {
-            Console.WriteLine("Магазин працює");
+            get { return products; }
+            set { products = value; }
         }
 
-        public void CloseOrders()
+        public List<Order> Orders
         {
-            Console.WriteLine("Вікно замовлень закрите");
+            get { return orders; }
+            set { orders = value; }
+        }
+
+        public Manager Manager
+        {
+            get { return manager; }
+            set { manager = value; }
+        }
+
+        static OnlineStore()
+        {
+            Console.WriteLine("Статичний конструктор OnlineStore");
+        }
+
+        private OnlineStore(bool isHidden)
+        {
+            Console.WriteLine("Закритий конструктор OnlineStore");
+        }
+
+        public OnlineStore()
+        {
+            products = new List<Product>();
+            orders = new List<Order>();
+            manager = new Manager();
+
+            Console.WriteLine("Конструктор без параметрів OnlineStore");
+        }
+
+        public OnlineStore(List<Product> products, List<Order> orders, Manager manager)
+        {
+            this.products = products;
+            this.orders = orders;
+            this.manager = manager;
+
+            Console.WriteLine("Конструктор з параметрами OnlineStore");
+        }
+
+        public OnlineStore(OnlineStore other)
+        {
+            products = new List<Product>(other.products);
+            orders = new List<Order>(other.orders);
+            manager = new Manager(other.manager);
+
+            Console.WriteLine("Конструктор копіювання OnlineStore");
+        }
+
+        public OnlineStore(Manager manager) : this()
+        {
+            this.manager = manager;
+
+            Console.WriteLine("Конструктор з викликом іншого конструктора OnlineStore");
+        }
+
+        public void OpenStore()
+        {
+            Console.WriteLine("Інтернет-магазин працює");
+        }
+
+        public void AddProduct(Product product)
+        {
+            products.Add(product);
+            Console.WriteLine("Товар додано до магазину");
+        }
+
+        public void AddOrder(Order order)
+        {
+            orders.Add(order);
+            Console.WriteLine("Замовлення додано до системи");
+        }
+
+        public void ShowStoreInfo()
+        {
+            Console.WriteLine($"Кількість товарів: {products.Count}");
+            Console.WriteLine($"Кількість замовлень: {orders.Count}");
+
+            manager.ShowManagerInfo();
         }
     }
 }
