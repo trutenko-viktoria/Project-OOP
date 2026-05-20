@@ -17,7 +17,7 @@ namespace Project
             Console.WriteLine("Старт імітації");
 
             //============================================
-            Console.WriteLine("----- Перевірка класу Product -----");
+            //Console.WriteLine("----- Перевірка класу Product -----");
 
             Product product1 = new Product();
             product1.ShowProductInfo();

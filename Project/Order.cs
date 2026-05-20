@@ -28,12 +28,12 @@ namespace Project
 
         static Order()
         {
-            Console.WriteLine("Статичний конструктор Order");
+          //  Console.WriteLine("Статичний конструктор Order");
         }
 
         private Order(bool isHidden)
         {
-            Console.WriteLine("Закритий конструктор Order");
+           // Console.WriteLine("Закритий конструктор Order");
         }
 
         public Order()
@@ -42,7 +42,7 @@ namespace Project
             payment = new Payment();
             delivery = new Delivery();
 
-            Console.WriteLine("Конструктор без параметрів Order");
+           // Console.WriteLine("Конструктор без параметрів Order");
         }
 
         public Order(int orderNumber, Payment payment, Delivery delivery)
@@ -51,7 +51,7 @@ namespace Project
             this.payment = payment;
             this.delivery = delivery;
 
-            Console.WriteLine("Конструктор з параметрами Order");
+           // Console.WriteLine("Конструктор з параметрами Order");
         }
 
         public Order(Order other)
@@ -60,14 +60,14 @@ namespace Project
             payment = new Payment(other.payment);
             delivery = new Delivery(other.delivery);
 
-            Console.WriteLine("Конструктор копіювання Order");
+           // Console.WriteLine("Конструктор копіювання Order");
         }
 
         public Order(int orderNumber) : this()
         {
             this.orderNumber = orderNumber;
 
-            Console.WriteLine("Конструктор з викликом іншого конструктора Order");
+           // Console.WriteLine("Конструктор з викликом іншого конструктора Order");
         }
 
         public void RegisterOrder()

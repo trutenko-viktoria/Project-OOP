@@ -54,12 +54,12 @@ namespace Project
 
         static Product()
         {
-            Console.WriteLine("Статичний конструктор Product");
+           // Console.WriteLine("Статичний конструктор Product");
         }
 
         private Product(bool secret)
         {
-            Console.WriteLine("Закритий конструктор Product");
+          //  Console.WriteLine("Закритий конструктор Product");
         }
 
         public Product(string name,
@@ -77,7 +77,7 @@ namespace Project
             this.size = size;
             this.color = color;
 
-            Console.WriteLine("Конструктор з параметрами Product");
+           // Console.WriteLine("Конструктор з параметрами Product");
         }
 
         //ТИМЧАСОВА ШТУКА ДЛЯ КОМПІЛЯЦІЇ БО ВИРІШЕНО РОБИТИ КАТАЛОГ В TXT
@@ -91,7 +91,7 @@ namespace Project
             size = "Не вказано";
             color = "Не вказано";
 
-            Console.WriteLine("Конструктор з параметрами Product");
+           // Console.WriteLine("Конструктор з параметрами Product");
         }
 
         public Product(Product other)
@@ -104,14 +104,14 @@ namespace Project
             size = other.size;
             color = other.color;
 
-            Console.WriteLine("Конструктор копіювання Product");
+           // Console.WriteLine("Конструктор копіювання Product");
         }
 
         public Product(string name) : this()
         {
             this.name = name;
 
-            Console.WriteLine("Конструктор з викликом іншого конструктора Product");
+           // Console.WriteLine("Конструктор з викликом іншого конструктора Product");
         }
 
         public Product()
@@ -124,7 +124,7 @@ namespace Project
             size = "Не вказано";
             color = "Не вказано";
 
-            Console.WriteLine("Конструктор без параметрів Product");
+          //  Console.WriteLine("Конструктор без параметрів Product");
         }
 
         //3 версія - булефі функції

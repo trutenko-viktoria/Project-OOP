@@ -25,12 +25,12 @@ namespace Project
 
         static Payment()
         {
-            Console.WriteLine("Статичний конструктор Payment");
+           // Console.WriteLine("Статичний конструктор Payment");
         }
 
         private Payment(bool isHidden)
         {
-            Console.WriteLine("Закритий конструктор Payment");
+           // Console.WriteLine("Закритий конструктор Payment");
         }
 
         public Payment()
@@ -38,7 +38,7 @@ namespace Project
             amount = 0;
             isPaid = false;
 
-            Console.WriteLine("Конструктор без параметрів Payment");
+           // Console.WriteLine("Конструктор без параметрів Payment");
         }
 
         public Payment(double amount, bool isPaid)
@@ -46,7 +46,7 @@ namespace Project
             this.amount = amount;
             this.isPaid = isPaid;
 
-            Console.WriteLine("Конструктор з параметрами Payment");
+           // Console.WriteLine("Конструктор з параметрами Payment");
         }
 
         public Payment(Payment other)
@@ -54,14 +54,14 @@ namespace Project
             amount = other.amount;
             isPaid = other.isPaid;
 
-            Console.WriteLine("Конструктор копіювання Payment");
+           // Console.WriteLine("Конструктор копіювання Payment");
         }
 
         public Payment(double amount) : this()
         {
             this.amount = amount;
 
-            Console.WriteLine("Конструктор з викликом іншого конструктора Payment");
+           // Console.WriteLine("Конструктор з викликом іншого конструктора Payment");
         }
 
         public void Pay()

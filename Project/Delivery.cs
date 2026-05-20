@@ -25,12 +25,12 @@ namespace Project
 
         static Delivery()
         {
-            Console.WriteLine("Статичний конструктор Delivery");
+           // Console.WriteLine("Статичний конструктор Delivery");
         }
 
         private Delivery(bool isHidden)
         {
-            Console.WriteLine("Закритий конструктор Delivery");
+         //   Console.WriteLine("Закритий конструктор Delivery");
         }
 
         public Delivery()
@@ -38,7 +38,7 @@ namespace Project
             address = "Адреса не вказана";
             status = "не оформлена";
 
-            Console.WriteLine("Конструктор без параметрів Delivery");
+           // Console.WriteLine("Конструктор без параметрів Delivery");
         }
 
         public Delivery(string address, string status)
@@ -46,7 +46,7 @@ namespace Project
             this.address = address;
             this.status = status;
 
-            Console.WriteLine("Конструктор з параметрами Delivery");
+            // Console.WriteLine("Конструктор з параметрами Delivery");
         }
 
         public Delivery(Delivery other)
@@ -54,14 +54,14 @@ namespace Project
             address = other.address;
             status = other.status;
 
-            Console.WriteLine("Конструктор копіювання Delivery");
+         //   Console.WriteLine("Конструктор копіювання Delivery");
         }
 
         public Delivery(string address) : this()
         {
             this.address = address;
 
-            Console.WriteLine("Конструктор з викликом іншого конструктора Delivery");
+          //  Console.WriteLine("Конструктор з викликом іншого конструктора Delivery");
         }
 
         public void Deliver()

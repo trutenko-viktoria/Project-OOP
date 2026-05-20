@@ -25,12 +25,12 @@ namespace Project
 
         static Manager()
         {
-            Console.WriteLine("Статичний конструктор Manager");
+         //   Console.WriteLine("Статичний конструктор Manager");
         }
 
         private Manager(bool isHidden)
         {
-            Console.WriteLine("Закритий конструктор Manager");
+           // Console.WriteLine("Закритий конструктор Manager");
         }
 
         public Manager()
@@ -38,7 +38,7 @@ namespace Project
             managerName = "Невідомий менеджер";
             processedOrdersCount = 0;
 
-            Console.WriteLine("Конструктор без параметрів Manager");
+           // Console.WriteLine("Конструктор без параметрів Manager");
         }
 
         public Manager(string managerName, int processedOrdersCount)
@@ -46,7 +46,7 @@ namespace Project
             this.managerName = managerName;
             this.processedOrdersCount = processedOrdersCount;
 
-            Console.WriteLine("Конструктор з параметрами Manager");
+           // Console.WriteLine("Конструктор з параметрами Manager");
         }
 
         public Manager(Manager other)
@@ -54,14 +54,14 @@ namespace Project
             managerName = other.managerName;
             processedOrdersCount = other.processedOrdersCount;
 
-            Console.WriteLine("Конструктор копіювання Manager");
+           // Console.WriteLine("Конструктор копіювання Manager");
         }
 
         public Manager(string managerName) : this()
         {
             this.managerName = managerName;
 
-            Console.WriteLine("Конструктор з викликом іншого конструктора Manager");
+           // Console.WriteLine("Конструктор з викликом іншого конструктора Manager");
         }
 
         public void ControlOrders()

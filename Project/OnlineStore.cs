@@ -32,12 +32,12 @@ namespace Project
 
         static OnlineStore()
         {
-            Console.WriteLine("Статичний конструктор OnlineStore");
+           // Console.WriteLine("Статичний конструктор OnlineStore");
         }
 
         private OnlineStore(bool isHidden)
         {
-            Console.WriteLine("Закритий конструктор OnlineStore");
+           // Console.WriteLine("Закритий конструктор OnlineStore");
         }
 
         public OnlineStore()
@@ -46,7 +46,7 @@ namespace Project
             orders = new List<Order>();
             manager = new Manager();
 
-            Console.WriteLine("Конструктор без параметрів OnlineStore");
+           // Console.WriteLine("Конструктор без параметрів OnlineStore");
         }
 
         public OnlineStore(List<Product> products, List<Order> orders, Manager manager)
@@ -55,7 +55,7 @@ namespace Project
             this.orders = orders;
             this.manager = manager;
 
-            Console.WriteLine("Конструктор з параметрами OnlineStore");
+           // Console.WriteLine("Конструктор з параметрами OnlineStore");
         }
 
         public OnlineStore(OnlineStore other)
@@ -64,14 +64,14 @@ namespace Project
             orders = new List<Order>(other.orders);
             manager = new Manager(other.manager);
 
-            Console.WriteLine("Конструктор копіювання OnlineStore");
+           // Console.WriteLine("Конструктор копіювання OnlineStore");
         }
 
         public OnlineStore(Manager manager) : this()
         {
             this.manager = manager;
 
-            Console.WriteLine("Конструктор з викликом іншого конструктора OnlineStore");
+           // Console.WriteLine("Конструктор з викликом іншого конструктора OnlineStore");
         }
 
         public void OpenStore()

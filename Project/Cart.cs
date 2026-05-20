@@ -22,12 +22,12 @@ namespace Project
 
         static Cart()
         {
-            Console.WriteLine("Статичний конструктор Cart");
+         //   Console.WriteLine("Статичний конструктор Cart");
         }
 
         private Cart(bool isHidden)
         {
-            Console.WriteLine("Закритий конструктор Cart");
+          //  Console.WriteLine("Закритий конструктор Cart");
         }
 
         public Cart()
@@ -35,7 +35,7 @@ namespace Project
             products = new List<Product>();
             totalPrice = 0;
 
-            Console.WriteLine("Конструктор без параметрів Cart");
+           // Console.WriteLine("Конструктор без параметрів Cart");
         }
 
         public Cart(List<Product> products, double totalPrice)
@@ -43,7 +43,7 @@ namespace Project
             this.products = products;
             this.totalPrice = totalPrice;
 
-            Console.WriteLine("Конструктор з параметрами Cart");
+           // Console.WriteLine("Конструктор з параметрами Cart");
         }
 
         public Cart(Cart other)
@@ -51,20 +51,20 @@ namespace Project
             products = new List<Product>(other.products);
             totalPrice = other.totalPrice;
 
-            Console.WriteLine("Конструктор копіювання Cart");
+           // Console.WriteLine("Конструктор копіювання Cart");
         }
 
         public Cart(List<Product> products) : this()
         {
             this.products = products;
 
-            Console.WriteLine("Конструктор з викликом іншого конструктора Cart");
+           // Console.WriteLine("Конструктор з викликом іншого конструктора Cart");
         }
 
         public void AddProduct(Product product)
         {
             products.Add(product);
-            Console.WriteLine("Товар додано у корзину");
+           // Console.WriteLine("Товар додано у корзину");
         }
 
         public void CalculateTotalPrice()
