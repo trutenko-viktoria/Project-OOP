@@ -370,6 +370,32 @@ namespace Project
 
             //5
             store2.ShowCatalog();
+
+            //4
+            Console.WriteLine("Введіть номер товару або номер з + для повної інформації:");
+            string userChoice = Console.ReadLine();
+
+            if (userChoice.Contains("+"))
+            {
+                string numberPart = userChoice.Replace("+", "");
+
+                int productIndex = Convert.ToInt32(numberPart) - 1;
+
+                store2.ShowProductDetails(productIndex);
+            }
+            else
+            {
+                int productIndex = Convert.ToInt32(userChoice) - 1;
+
+                Product selectedProduct = store2.GetProductByIndex(productIndex);
+
+                if (selectedProduct != null)
+                {
+                    client2.AddToCart(selectedProduct);
+
+                    Console.WriteLine("Товар додано у корзину");
+                }
+            }
             //
 
             store2.ShowStoreInfo();

@@ -160,12 +160,22 @@ namespace Project
 
         public static bool operator ==(Product firstProduct, Product secondProduct)
         {
+            if (ReferenceEquals(firstProduct, secondProduct))
+            {
+                return true;
+            }
+
+            if (firstProduct is null || secondProduct is null)
+            {
+                return false;
+            }
+
             return firstProduct.price == secondProduct.price;
         }
 
         public static bool operator !=(Product firstProduct, Product secondProduct)
         {
-            return firstProduct.price != secondProduct.price;
+            return !(firstProduct == secondProduct);
         }
 
         public static bool operator >(Product firstProduct, Product secondProduct)

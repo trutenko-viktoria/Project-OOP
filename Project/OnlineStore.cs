@@ -146,6 +146,30 @@ namespace Project
             Console.WriteLine();
         }
 
+        //4 версія
+        public void ShowProductDetails(int index)
+        {
+            if (index >= 0 && index < products.Count)
+            {
+                products[index].ShowProductInfo();
+            }
+            else
+            {
+                Console.WriteLine("Товар не знайдено");
+            }
+        }
+
+        public Product GetProductByIndex(int index)
+        {
+            if (index >= 0 && index < products.Count)
+            {
+                return products[index];
+            }
+
+            return null;
+        }
+
+        //
 
         public void ShowStoreInfo()
         {
