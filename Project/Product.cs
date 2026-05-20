@@ -98,6 +98,35 @@ namespace Project
         }
         //
 
+        //4 версія - перевантаження операторів
+        //ex: product1+product2=value
+        public static double operator +(Product firstProduct, Product secondProduct)
+        {
+            return firstProduct.price + secondProduct.price;
+        }
+
+        public static bool operator ==(Product firstProduct, Product secondProduct)
+        {
+            return firstProduct.price == secondProduct.price;
+        }
+
+        public static bool operator !=(Product firstProduct, Product secondProduct)
+        {
+            return firstProduct.price != secondProduct.price;
+        }
+
+        public static bool operator >(Product firstProduct, Product secondProduct)
+        {
+            return firstProduct.price > secondProduct.price;
+        }
+
+        public static bool operator <(Product firstProduct, Product secondProduct)
+        {
+            return firstProduct.price < secondProduct.price;
+        }
+        //
+
+
         public void ShowProductInfo()
         {
             Console.WriteLine($"Товар: {name}");

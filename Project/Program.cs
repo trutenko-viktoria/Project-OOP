@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Project
 {
@@ -16,7 +13,7 @@ namespace Project
             Console.WriteLine("Курс: 1");
             Console.WriteLine("Група: ІПЗ-11");
             Console.WriteLine("Варіант: 45");
-            Console.WriteLine("Версія 3");
+            Console.WriteLine("Версія 4");
             Console.WriteLine("Старт імітації");
 
             //============================================
@@ -42,6 +39,23 @@ namespace Project
 
             Product product4 = new Product("Смартфон");
             product4.ShowProductInfo();
+
+            //4 версія - оператори
+            Console.WriteLine();
+
+            Console.WriteLine("----- Перевантаження операторів Product -----");
+
+            double totalPrice = product2 + product4;
+            Console.WriteLine($"Сума цін товарів: {totalPrice}");
+
+            Console.WriteLine($"Товари мають однакову ціну: {product2 == product4}");
+            Console.WriteLine($"Товари мають різну ціну: {product2 != product4}");
+
+            Console.WriteLine($"Product2 дорожчий за Product4: {product2 > product4}");
+            Console.WriteLine($"Product2 дешевший за Product4: {product2 < product4}");
+
+            Console.WriteLine();
+            //
 
             Console.WriteLine();
 
