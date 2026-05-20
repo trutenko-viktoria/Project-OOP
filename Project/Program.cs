@@ -57,8 +57,6 @@ namespace Project
             Console.WriteLine();
             //
 
-            Console.WriteLine();
-
             //======================================
 
             Console.WriteLine("----- Перевірка класу Payment -----");
@@ -92,7 +90,17 @@ namespace Project
             Payment payment4 = new Payment(15000);
             payment4.ShowPaymentInfo();
 
+            //4 версія - оператори
             Console.WriteLine();
+
+            Console.WriteLine("----- Перевантаження операторів Payment -----");
+
+            Console.WriteLine($"Оплата не виконана: {!payment2}");
+
+            Console.WriteLine();
+            //
+
+
             //=============================================
 
             Console.WriteLine("----- Перевірка класу Delivery -----");
@@ -202,7 +210,32 @@ namespace Project
             cart1.CanCreateOrder();
             //
 
+            //4 версія - оператори
             Console.WriteLine();
+
+            Console.WriteLine("----- Перевантаження операторів Cart -----");
+
+            cart1++;
+            cart1.ShowCartInfo();
+
+            Console.WriteLine();
+
+            cart1--;
+            cart1.ShowCartInfo();
+
+            Console.WriteLine();
+
+            if (cart1)
+            {
+                Console.WriteLine("Корзина не порожня");
+            }
+            else
+            {
+                Console.WriteLine("Корзина порожня");
+            }
+
+            Console.WriteLine();
+            //
 
             //===========================================
 
@@ -273,6 +306,16 @@ namespace Project
 
             Order order4 = new Order(202);
             order4.ShowOrderInfo();
+
+            Console.WriteLine();
+
+            //4 версія - оператори
+            Console.WriteLine();
+
+            Console.WriteLine("----- Перевантаження операторів Order -----");
+
+            Console.WriteLine($"Order2 >= Order4: {order2 >= order4}");
+            Console.WriteLine($"Order2 <= Order4: {order2 <= order4}");
 
             Console.WriteLine();
 

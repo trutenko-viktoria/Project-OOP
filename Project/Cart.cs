@@ -105,6 +105,33 @@ namespace Project
         }
         //
 
+        //4 версія - оператори
+        //ex: збільшує прайс
+        public static Cart operator ++(Cart cart)
+        {
+            cart.totalPrice += 100;
+
+            return cart;
+        }
+        public static Cart operator --(Cart cart)
+        {
+            cart.totalPrice -= 100;
+
+            return cart;
+        }
+
+        public static bool operator true(Cart cart)
+        {
+            return cart.totalPrice > 0;
+        }
+
+        public static bool operator false(Cart cart)
+        {
+            return cart.totalPrice <= 0;
+        }
+        //
+
+
         public void ShowCartInfo()
         {
             Console.WriteLine($"Кількість товарів у корзині: {products.Count}");

@@ -95,6 +95,13 @@ namespace Project
         }
         //
 
+        //4 версія- оператори
+        public static bool operator !(Payment payment)
+        {
+            return !payment.isPaid;
+        }
+        //
+
         public void ShowPaymentInfo()
         {
             Console.WriteLine($"Сума оплати: {amount}");

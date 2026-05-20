@@ -104,6 +104,18 @@ namespace Project
         }
         //
 
+        //4 версія - оператори
+        public static bool operator >=(Order firstOrder, Order secondOrder)
+        {
+            return firstOrder.orderNumber >= secondOrder.orderNumber;
+        }
+
+        public static bool operator <=(Order firstOrder, Order secondOrder)
+        {
+            return firstOrder.orderNumber <= secondOrder.orderNumber;
+        }
+        //
+
         public void ShowOrderInfo()
         {
             Console.WriteLine($"Номер замовлення: {orderNumber}");
