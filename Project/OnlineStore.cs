@@ -132,6 +132,19 @@ namespace Project
         }
         //
 
+        //5 версія
+        public void ShowCatalog()
+        {
+            Console.WriteLine("===== Каталог товарів =====");
+
+            for (int i = 0; i < products.Count; i++)
+            {
+                Console.Write($"{i + 1}. ");
+                products[i].ShowShortInfo();
+            }
+
+            Console.WriteLine();
+        }
 
 
         public void ShowStoreInfo()

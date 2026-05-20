@@ -329,8 +329,35 @@ namespace Project
 
             Console.WriteLine();
 
+            //5 версія
             List<Product> storeProducts = new List<Product>();
-            storeProducts.Add(new Product("Монітор", 8000, 2));
+
+            storeProducts.Add(
+                new Product(
+                    "Худі",
+                    1200,
+                    5,
+                    "Тепле oversize худі",
+                    "M",
+                    "Сірий"));
+
+            storeProducts.Add(
+                new Product(
+                    "Сукня",
+                    1800,
+                    3,
+                    "Чорна вечірня сукня",
+                    "S",
+                    "Чорний"));
+
+            storeProducts.Add(
+                new Product(
+                    "Джинси",
+                    1500,
+                    2,
+                    "Широкі сині джинси",
+                    "M",
+                    "Синій"));
 
             List<Order> storeOrders = new List<Order>();
             storeOrders.Add(order2);
@@ -340,6 +367,11 @@ namespace Project
             OnlineStore store2 = new OnlineStore(storeProducts, storeOrders, storeManager);
 
             store2.OpenStore();
+
+            //5
+            store2.ShowCatalog();
+            //
+
             store2.ShowStoreInfo();
 
             //3 версія - методи сценарію
