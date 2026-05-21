@@ -63,6 +63,9 @@ namespace Project
 
             store.OpenStore();
 
+            //5
+            store.LoadProductsFromFile("products.txt");
+
             string choice;
 
             do
@@ -80,37 +83,47 @@ namespace Project
                 {
                     break;
                 }
-
-                if (choice.Contains("+"))
+                try
                 {
-                    string numberPart = choice.Replace("+", "");
-                    int productIndex = Convert.ToInt32(numberPart) - 1;
-
-                    store.ShowProductDetails(productIndex);
-                }
-                else
-                {
-                    int productIndex = Convert.ToInt32(choice) - 1;
-
-                    Product selectedProduct = store.GetProductByIndex(productIndex);
-
-                    if (selectedProduct != null && selectedProduct.IsAvailable())
+                    if (choice.Contains("+"))
                     {
-                        Product productForCart = new Product(
-                            selectedProduct.Name,
-                            selectedProduct.Price,
-                            1,
-                            selectedProduct.Description,
-                            selectedProduct.Size,
-                            selectedProduct.Color);
+                        string numberPart = choice.Replace("+", "");
 
-                        client.AddToCart(productForCart);
-                        selectedProduct.DecreaseQuantity();
+                        int productIndex = Convert.ToInt32(numberPart) - 1;
+
+                        store.ShowProductDetails(productIndex);
                     }
                     else
                     {
-                        Console.WriteLine("Товар відсутній або вибрано неправильний номер");
+                        int productIndex = Convert.ToInt32(choice) - 1;
+
+                        Product selectedProduct = store.GetProductByIndex(productIndex);
+
+                        if (selectedProduct != null && selectedProduct.IsAvailable())
+                        {
+                            Product productForCart = new Product(
+                                selectedProduct.Name,
+                                selectedProduct.Price,
+                                1,
+                                selectedProduct.Description,
+                                selectedProduct.Size,
+                                selectedProduct.Color);
+
+                            client.AddToCart(productForCart);
+
+                            selectedProduct.DecreaseQuantity();
+
+                            store.SaveProductsToFile("products.txt");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Товар відсутній або вибрано неправильний номер");
+                        }
                     }
+                }
+                catch
+                {
+                    Console.WriteLine("Помилка введення даних");
                 }
 
             } while (choice != "0");

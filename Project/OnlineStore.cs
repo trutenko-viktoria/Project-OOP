@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 
 namespace Project
 {
@@ -133,6 +131,54 @@ namespace Project
         //
 
         //5 версія
+
+        public void LoadProductsFromFile(string filePath)
+        {
+            products.Clear();
+
+            string[] lines = File.ReadAllLines(filePath);
+
+            foreach (string line in lines)
+            {
+                string[] data = line.Split(';');
+
+                Product product = new Product(
+                    data[0],
+                    Convert.ToDouble(data[1]),
+                    Convert.ToInt32(data[2]),
+                    data[3],
+                    data[4],
+                    data[5]);
+
+                products.Add(product);
+            }
+
+            Console.WriteLine("Каталог товарів завантажено з файлу");
+        }
+
+        //5
+        public void SaveProductsToFile(string filePath)
+        {
+            List<string> lines = new List<string>();
+
+            foreach (Product product in products)
+            {
+                string line =
+                    $"{product.Name};" +
+                    $"{product.Price};" +
+                    $"{product.Quantity};" +
+                    $"{product.Description};" +
+                    $"{product.Size};" +
+                    $"{product.Color}";
+
+                lines.Add(line);
+            }
+
+            File.WriteAllLines(filePath, lines);
+
+            Console.WriteLine("Каталог товарів оновлено");
+        }
+
         public void ShowCatalog()
         {
             Console.WriteLine("===== Каталог товарів =====");
