@@ -39,6 +39,9 @@ namespace Project
 
             client.Register();
 
+            //v5
+            client.ShowUserRole();
+
             Console.WriteLine();
 
             List<Product> storeProducts = new List<Product>();
@@ -49,6 +52,9 @@ namespace Project
 
             List<Order> storeOrders = new List<Order>();
             Manager storeManager = new Manager("Максим", 5);
+
+            //5
+            storeManager.ShowUserRole();
 
             OnlineStore store = new OnlineStore(
                 storeProducts,
