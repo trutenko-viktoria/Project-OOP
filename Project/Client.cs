@@ -121,7 +121,7 @@ namespace Project
 
         public override void ShowUserRole()
         {
-            Console.WriteLine("Роль: Клієнт");
+            Console.WriteLine($"[Система авторизації] Користувач увійшов у профіль як: КЛІЄНТ.");
         }
 
         //V5
