@@ -1,21 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Project
 {
-    internal class Manager
+    internal class Manager : User
     {
-        private string managerName;
         private int processedOrdersCount;
-
-        public string ManagerName
-        {
-            get { return managerName; }
-            set { managerName = value; }
-        }
 
         public int ProcessedOrdersCount
         {
@@ -33,17 +22,16 @@ namespace Project
            // Console.WriteLine("Закритий конструктор Manager");
         }
 
-        public Manager()
+        public Manager() : base()
         {
-            managerName = "Невідомий менеджер";
             processedOrdersCount = 0;
-
-           // Console.WriteLine("Конструктор без параметрів Manager");
         }
+        // Console.WriteLine("Конструктор без параметрів Manager");
 
-        public Manager(string managerName, int processedOrdersCount)
+
+        public Manager(string fullName, int processedOrdersCount)
+        : base(fullName, "Не вказано")
         {
-            this.managerName = managerName;
             this.processedOrdersCount = processedOrdersCount;
 
            // Console.WriteLine("Конструктор з параметрами Manager");
@@ -85,6 +73,7 @@ namespace Project
         {
             return processedOrdersCount >= 5;
         }
+
         //3 версія - методи сценарію
         public void CheckStoreOrders(OnlineStore store)
         {
@@ -99,9 +88,16 @@ namespace Project
         }
         //
 
+        //V5
+        public override void ShowUserRole()
+        {
+            Console.WriteLine("Роль: Менеджер");
+        }
+        //
+
         public void ShowManagerInfo()
         {
-            Console.WriteLine($"Менеджер: {managerName}");
+            Console.WriteLine($"Менеджер: {fullName}");
             Console.WriteLine($"Кількість оброблених замовлень: {processedOrdersCount}");
         }
 
