@@ -7,6 +7,13 @@ namespace Project
         private int orderNumber;
         private Payment payment;
         private Delivery delivery;
+        private string trackingNumber;
+
+        public string TrackingNumber
+        {
+            get { return trackingNumber; }
+            set { trackingNumber = value; }
+        }
 
         public int OrderNumber
         {
@@ -50,8 +57,9 @@ namespace Project
             this.orderNumber = orderNumber;
             this.payment = payment;
             this.delivery = delivery;
+            trackingNumber = GenerateTrackingNumber();
 
-           // Console.WriteLine("Конструктор з параметрами Order");
+            // Console.WriteLine("Конструктор з параметрами Order");
         }
 
         public Order(Order other)
@@ -68,6 +76,13 @@ namespace Project
             this.orderNumber = orderNumber;
 
            // Console.WriteLine("Конструктор з викликом іншого конструктора Order");
+        }
+
+        private string GenerateTrackingNumber()
+        {
+            Random random = new Random();
+
+            return "TTN-" + random.Next(100000, 999999);
         }
 
         public void RegisterOrder()
@@ -122,6 +137,7 @@ namespace Project
 
             payment.ShowPaymentInfo();
             delivery.ShowDeliveryInfo();
+            Console.WriteLine($"ТТН: {trackingNumber}");
         }
     }
 }
