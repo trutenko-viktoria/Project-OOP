@@ -35,12 +35,12 @@ namespace Project
 
         static Order()
         {
-          //  Console.WriteLine("Статичний конструктор Order");
+            //  Console.WriteLine("Статичний конструктор Order");
         }
 
         private Order(bool isHidden)
         {
-           // Console.WriteLine("Закритий конструктор Order");
+            // Console.WriteLine("Закритий конструктор Order");
         }
 
         public Order()
@@ -49,7 +49,7 @@ namespace Project
             payment = new Payment();
             delivery = new Delivery();
 
-           // Console.WriteLine("Конструктор без параметрів Order");
+            // Console.WriteLine("Конструктор без параметрів Order");
         }
 
         public Order(int orderNumber, Payment payment, Delivery delivery)
@@ -67,15 +67,17 @@ namespace Project
             orderNumber = other.orderNumber;
             payment = new Payment(other.payment);
             delivery = new Delivery(other.delivery);
+            // ВИПРАВЛЕНО: Додано копіювання ТТН, щоб воно не втрачалося при копіюванні об'єкта
+            trackingNumber = other.trackingNumber;
 
-           // Console.WriteLine("Конструктор копіювання Order");
+            // Console.WriteLine("Конструктор копіювання Order");
         }
 
         public Order(int orderNumber) : this()
         {
             this.orderNumber = orderNumber;
 
-           // Console.WriteLine("Конструктор з викликом іншого конструктора Order");
+            // Console.WriteLine("Конструктор з викликом іншого конструктора Order");
         }
 
         private string GenerateTrackingNumber()
@@ -105,7 +107,7 @@ namespace Project
         {
             return delivery != null;
         }
-        //3 версія - методи сценарію
+        //3 версія -Box методи сценарію
         public void ConfirmOrder()
         {
             if (IsPaidOrder() && HasDelivery())
