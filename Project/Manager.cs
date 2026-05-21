@@ -2,7 +2,8 @@
 
 namespace Project
 {
-    internal class Manager : User
+    // Додано : IShowInfo, щоб інтерфейс використовувався в проекті
+    internal class Manager : User, IShowInfo
     {
         private int processedOrdersCount;
 
@@ -14,12 +15,12 @@ namespace Project
 
         static Manager()
         {
-         //   Console.WriteLine("Статичний конструктор Manager");
+            //   Console.WriteLine("Статичний конструктор Manager");
         }
 
         private Manager(bool isHidden)
         {
-           // Console.WriteLine("Закритий конструктор Manager");
+            // Console.WriteLine("Закритий конструктор Manager");
         }
 
         public Manager() : base()
@@ -32,16 +33,21 @@ namespace Project
         public Manager(string fullName, int processedOrdersCount)
         : base(fullName, "Не вказано")
         {
+            // ВИПРАВЛЕНО: Явно записуємо ім'я в protected поле базового класу
+            // щоб метод ShowManagerInfo() бачив його в консолі
+            this.fullName = fullName;
             this.processedOrdersCount = processedOrdersCount;
 
-           // Console.WriteLine("Конструктор з параметрами Manager");
+            // Console.WriteLine("Конструктор з параметрами Manager");
         }
 
         public Manager(Manager other)
         {
+            // ВИПРАВЛЕНО: Копіюємо також і ім'я менеджера
+            this.fullName = other.fullName;
             processedOrdersCount = other.processedOrdersCount;
 
-           // Console.WriteLine("Конструктор копіювання Manager");
+            // Console.WriteLine("Конструктор копіювання Manager");
         }
 
         public void ControlOrders()
@@ -83,9 +89,16 @@ namespace Project
         //V5
         public override void ShowUserRole()
         {
-            Console.WriteLine("Роль: Менеджер");
+            // МОДЕРНІЗОВАНО: тепер вивід інтегрований у бізнес-процес магазину
+            Console.WriteLine($"[Авторизація] Працівник {fullName} увійшов у систему з роллю: МЕНЕДЖЕР.");
         }
         //
+
+        // Реалізація методу інтерфейсу IShowInfo
+        public void ShowInfo()
+        {
+            ShowManagerInfo();
+        }
 
         public void ShowManagerInfo()
         {
