@@ -2,7 +2,7 @@
 
 namespace Project
 {
-    internal class Client
+    internal class Client : User
     {
         private string fullName;
         private string phoneNumber;
@@ -46,9 +46,8 @@ namespace Project
         }
 
         public Client(string fullName, string phoneNumber, Cart cart)
+         : base(fullName, phoneNumber)
         {
-            this.fullName = fullName;
-            this.phoneNumber = phoneNumber;
             this.cart = cart;
 
            // Console.WriteLine("Конструктор з параметрами Client");
@@ -115,6 +114,11 @@ namespace Project
             return phoneNumber != "Не вказано";
         }
         //
+
+        public override void ShowUserRole()
+        {
+            Console.WriteLine("Роль: Клієнт");
+        }
 
         public void ShowClientInfo()
         {
