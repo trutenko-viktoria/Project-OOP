@@ -120,6 +120,12 @@ namespace Project
             Console.WriteLine("Роль: Клієнт");
         }
 
+        //V5
+        public void ShowInfo()
+        {
+            ShowClientInfo();
+        }
+
         public void ShowClientInfo()
         {
             Console.WriteLine($"Клієнт: {fullName}");

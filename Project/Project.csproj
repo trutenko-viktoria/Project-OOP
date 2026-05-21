@@ -46,6 +46,7 @@
     <Compile Include="Cart.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="Delivery.cs" />
+    <Compile Include="IShowInfo.cs" />
     <Compile Include="Manager.cs" />
     <Compile Include="OnlineStore.cs" />
     <Compile Include="Order.cs" />

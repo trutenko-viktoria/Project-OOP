@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Project
 {
-    internal class Product
+    internal class Product : IShowInfo
     {
         private string name;
         private double price;
@@ -205,6 +205,12 @@ namespace Project
             {
                 Console.WriteLine("Товар відсутній на складі");
             }
+        }
+
+        //v5
+        public void ShowInfo()
+        {
+            ShowProductInfo();
         }
 
         public void ShowProductInfo()

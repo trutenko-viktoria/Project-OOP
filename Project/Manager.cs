@@ -39,17 +39,9 @@ namespace Project
 
         public Manager(Manager other)
         {
-            managerName = other.managerName;
             processedOrdersCount = other.processedOrdersCount;
 
            // Console.WriteLine("Конструктор копіювання Manager");
-        }
-
-        public Manager(string managerName) : this()
-        {
-            this.managerName = managerName;
-
-           // Console.WriteLine("Конструктор з викликом іншого конструктора Manager");
         }
 
         public void ControlOrders()
