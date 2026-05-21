@@ -28,12 +28,12 @@ namespace Project
 
         static Client()
         {
-          //  Console.WriteLine("Статичний конструктор Client");
+            //  Console.WriteLine("Статичний конструктор Client");
         }
 
         private Client(bool isHidden)
         {
-           // Console.WriteLine("Закритий конструктор Client");
+            // Console.WriteLine("Закритий конструктор Client");
         }
 
         public Client()
@@ -42,15 +42,19 @@ namespace Project
             phoneNumber = "Не вказано";
             cart = new Cart();
 
-           // Console.WriteLine("Конструктор без параметрів Client");
+            // Console.WriteLine("Конструктор без параметрів Client");
         }
 
         public Client(string fullName, string phoneNumber, Cart cart)
          : base(fullName, phoneNumber)
         {
+            // ВИПРАВЛЕНО: тепер дані записуються і в локальні поля класу Client,
+            // щоб уникнути помилки NullReferenceException в Program.cs
+            this.fullName = fullName;
+            this.phoneNumber = phoneNumber;
             this.cart = cart;
 
-           // Console.WriteLine("Конструктор з параметрами Client");
+            // Console.WriteLine("Конструктор з параметрами Client");
         }
 
         public Client(Client other)
@@ -59,7 +63,7 @@ namespace Project
             phoneNumber = other.phoneNumber;
             cart = new Cart(other.cart);
 
-           // Console.WriteLine("Конструктор копіювання Client");
+            // Console.WriteLine("Конструктор копіювання Client");
         }
 
         public Client(string fullName) : this()
@@ -71,7 +75,7 @@ namespace Project
 
         public void Register()
         {
-          //  Console.WriteLine($"Клієнт {fullName} зареєструвався");
+            //  Console.WriteLine($"Клієнт {fullName} зареєструвався");
         }
 
         //3 версія - покращення даного методу сцеенарію у зв'язку з покращенням класу Product
