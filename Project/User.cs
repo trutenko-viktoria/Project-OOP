@@ -1,4 +1,6 @@
-﻿namespace Project
+﻿using System;
+
+namespace Project
 {
     internal abstract class User
     {
@@ -7,8 +9,9 @@
 
         public User()
         {
-            fullName = "Невідомий користувач";
-            phoneNumber = "Не вказано";
+            // Беремо початкові значення тексту з json
+            fullName = Program.config.UserUnknown;
+            phoneNumber = Program.config.UserNoPhone;
         }
 
         public User(string fullName, string phoneNumber)

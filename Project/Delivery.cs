@@ -15,24 +15,22 @@ namespace Project
 
         public Delivery()
         {
-            address = "Адреса не вказана";
-            status = "не оформлена";
-
-           // Console.WriteLine("Конструктор без параметрів Delivery");
+            // Беремо дефолтні значення тексту з json
+            address = Program.config.DeliveryNoAddress;
+            status = Program.config.DeliveryStatusNone;
         }
 
         public Delivery(string address, string status)
         {
             this.address = address;
             this.status = status;
-
-            // Console.WriteLine("Конструктор з параметрами Delivery");
         }
 
         public void Deliver()
         {
-            status = "доставляється";
-            Console.WriteLine("Доставка здійснюється");
+            // Оновлюємо статус та вивід через конфіг
+            status = Program.config.DeliveryStatusActive;
+            Console.WriteLine(Program.config.DeliveryInProcess);
         }
     }
 }

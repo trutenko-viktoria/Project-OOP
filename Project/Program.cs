@@ -1,35 +1,87 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.Json; // підключаю для роботи з json конфігом
 
 namespace Project
 {
     internal class Program
     {
+        // повна моделька для зчитування нашого конфігу
+       
+        static string dbFile = "products.txt";
+        static OnlineStore store;
+        static Client client;
+        public static AppConfig config;
         static void Main(string[] args)
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             Console.InputEncoding = System.Text.Encoding.UTF8;
 
+            // виклик методу завантаження json
+            if (!LoadConfig())
+            {
+                Console.ReadLine();
+                return;
+            }
+
+            ShowStudentInfo();
+
+            // РЕЄСТРАЦІЯ КЛІЄНТА
+            RegisterNewClient();
+
+            // ІНІЦІАЛІЗАЦІЯ МАГАЗИНУ ТА МЕНЕДЖЕРА
+            InitializeStore();
+
+            // ЦИКЛ ВИБОРУ ТОВАРІВ (ІНТЕРФЕЙС КОРИСТУВАЧА)
+            ShoppingLoop();
+
+            // ОФОРМЛЕННЯ ЗАМОВЛЕННЯ ТА КОРЗИНА
+            ProcessOrderAndCheckout();
+        }
+
+        // читаємо json без будь-яких дефолтних значень
+        static bool LoadConfig()
+        {
+            string jsonPath = "config.json";
+            if (File.Exists(jsonPath))
+            {
+                string jsonString = File.ReadAllText(jsonPath);
+                config = JsonSerializer.Deserialize<AppConfig>(jsonString);
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Критична помилка: Файл конфігурації config.json не знайдено!");
+                return false;
+            }
+        }
+
+        static void ShowStudentInfo()
+        {
             Console.WriteLine("ПІБ студента: Трутенко Вікторія Миколаївна");
             Console.WriteLine("Курс: 1 | Група: ІПЗ-11 | Варіант: 45");
-            Console.WriteLine("=== Імітація роботи Інтернет-магазину (Версія 4-5-6) ===");
+            Console.WriteLine(config.WelcomeMessage);
             Console.WriteLine();
+        }
 
-            // 1. РЕЄСТРАЦІЯ КЛІЄНТА
-            Console.WriteLine("----- Реєстрація клієнта -----");
-            Console.Write("Введіть ім'я та прізвище: ");
+        static void RegisterNewClient()
+        {
+            Console.WriteLine(config.RegHeader);
+            Console.Write(config.AskName);
             string clientName = Console.ReadLine();
 
-            Console.Write("Введіть номер телефону: ");
+            Console.Write(config.AskPhone);
             string phoneNumber = Console.ReadLine();
 
             Cart clientCart = new Cart(); // Створюємо пусту корзину для клієнта
-            Client client = new Client(clientName, phoneNumber, clientCart);
+            client = new Client(clientName, phoneNumber, clientCart);
             client.Register();
             client.ShowUserRole(); // Демонстрація V5 (Успадкування)
+        }
 
-            // 2. ІНІЦІАЛІЗАЦІЯ МАГАЗИНУ ТА МЕНЕДЖЕРА
+        static void InitializeStore()
+        {
             Manager storeManager = new Manager("Максим", 4);
             storeManager.ShowUserRole(); // Демонстрація V5
 
@@ -37,126 +89,132 @@ namespace Project
             List<Product> storeProducts = new List<Product>();
             List<Order> storeOrders = new List<Order>();
 
-            OnlineStore store = new OnlineStore(storeProducts, storeOrders, storeManager);
+            store = new OnlineStore(storeProducts, storeOrders, storeManager);
             store.OpenStore();
-
-            // Перевіряємо, чи існує файл бази даних, якщо ні — створюємо дефолтний
-            string dbFile = "products.txt";
-            if (!File.Exists(dbFile))
-            {
-                // Тимчасово створюємо файл, якщо його немає на диску, щоб програма не падала
-                File.WriteAllLines(dbFile, new string[] {
-                    "Худі;1200;5;Тепле oversize худі;M;Сірий",
-                    "Сукня;1800;0;Чорна вечірня сукня;S;Чорний", // 0 штук для перевірки відсутності
-                    "Джинси;1500;2;Широкі сині джинси;M;Синій"
-                });
-            }
 
             // Завантажуємо актуальний склад товарів з нашої "бази даних"
             store.LoadProductsFromFile(dbFile);
+        }
 
-            // 3. ЦИКЛ ВИБОРУ ТОВАРІВ (ІНТЕРФЕЙС КОРИСТУВАЧА)
+        // меню виводиться одним форечем
+        static void ShowMenuFromFile()
+        {
+            foreach (string line in config.MenuLines)
+            {
+                Console.WriteLine(line);
+            }
+        }
+
+        // розбили великий метод: цей тепер тільки крутить цикл і читає те, що ввели
+        static void ShoppingLoop()
+        {
             string choice;
             do
             {
                 store.ShowCatalog();
-                Console.WriteLine("Введіть номер товару, щоб ДОДАТИ В КОШИК (наприклад: 1)");
-                Console.WriteLine("Введіть номер з '+' для ПЕРЕГЛЯДУ ДЕТАЛЕЙ (наприклад: 1+)");
-                Console.WriteLine("0 - Завершити покупки та перейти до оформлення");
-                Console.Write("Ваш вибір: ");
+                ShowMenuFromFile();
+                Console.Write(config.EnterChoice);
                 choice = Console.ReadLine();
 
                 if (choice == "0") break;
 
-                try
-                {
-                    if (choice.Contains("+"))
-                    {
-                        // Режим детальної інформації
-                        string numberPart = choice.Replace("+", "").Trim();
-                        int productIndex = Convert.ToInt32(numberPart) - 1;
-                        store.ShowProductDetails(productIndex);
-                    }
-                    else
-                    {
-                        // Режим додавання в кошик
-                        int productIndex = Convert.ToInt32(choice) - 1;
-                        Product selectedProduct = store.GetProductByIndex(productIndex);
+                // передаємо те, що ввів користувач, у новий метод для обробки
+                ProcessUserChoice(choice);
 
-                        if (selectedProduct != null)
-                        {
-                            if (selectedProduct.IsAvailable())
-                            {
-                                // Використовуємо конструктор копіювання для створення товару в кошик (кількість = 1)
-                                Product productForCart = new Product(selectedProduct);
-                                productForCart.Quantity = 1;
-
-                                client.AddToCart(productForCart);
-                                selectedProduct.DecreaseQuantity(); // Зменшуємо на складі магазину
-
-                                // Оновлюємо нашу текстову "базу даних", щоб зміни збереглися!
-                                store.SaveProductsToFile(dbFile);
-                            }
-                            else
-                            {
-                                Console.WriteLine($"[Увага!] Товар '{selectedProduct.Name}' відсутній у наявності!");
-                                store.Manager.ReplaceProduct(); // Менеджер пропонує заміну (подія за умовою)
-                            }
-                        }
-                        else
-                        {
-                            Console.WriteLine("Неправильний номер товару. Спробуйте ще раз.");
-                        }
-                    }
-                }
-                catch (Exception)
-                {
-                    Console.WriteLine("Помилка введення даних. Очікується число або число з '+'.");
-                }
-
-                Console.WriteLine("\nНатисніть Enter для продовження...");
+                Console.WriteLine(config.EnterToContinue);
                 Console.ReadLine();
                 Console.Clear();
 
             } while (choice != "0");
+        }
 
-            // 4. ОФОРМЛЕННЯ ЗАМОВЛЕННЯ ТА КОРЗИНА
+        // метод займається виключно логікою — аналізує рядок і додає в кошик
+        static void ProcessUserChoice(string choice)
+        {
+            try
+            {
+                if (choice.Contains("+"))
+                {
+                    // Режим детальної інформації
+                    string numberPart = choice.Replace("+", "").Trim();
+                    int productIndex = Convert.ToInt32(numberPart) - 1;
+                    store.ShowProductDetails(productIndex);
+                }
+                else
+                {
+                    // Режим додавання в кошик
+                    int productIndex = Convert.ToInt32(choice) - 1;
+                    Product selectedProduct = store.GetProductByIndex(productIndex);
+
+                    if (selectedProduct != null)
+                    {
+                        if (selectedProduct.IsAvailable())
+                        {
+                            // Використовуємо конструктор копіювання для створення товару в кошик (кількість = 1)
+                            Product productForCart = new Product(selectedProduct);
+                            productForCart.Quantity = 1;
+
+                            client.AddToCart(productForCart);
+                            selectedProduct.DecreaseQuantity(); // Зменшуємо на складі магазину
+
+                            // Оновлюємо нашу текстову "базу даних", щоб зміни збереглися!
+                            store.SaveProductsToFile(dbFile);
+                        }
+                        else
+                        {
+                            Console.WriteLine($"{config.Uvaga}'{selectedProduct.Name}'{config.NotAvailable}");
+                            store.Manager.ReplaceProduct(); // Менеджер пропонує заміну (подія за умовою)
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine(config.WrongProductNum);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                Console.WriteLine(config.InputError);
+            }
+        }
+
+        static void ProcessOrderAndCheckout()
+        {
             Console.Clear();
             client.Cart.CalculateTotalPrice();
             client.Cart.ShowCartInfo();
 
             if (client.Cart.IsEmpty())
             {
-                Console.WriteLine("Ви нічого не купили. Імітацію завершено.");
-                Console.WriteLine("Фініш імітації.");
+                Console.WriteLine(config.EmptyCartFinish);
                 return;
             }
 
             // Перевіряємо роботу унарного оператора "true/false" з Версії 4
             if (client.Cart)
             {
-                Console.WriteLine("[Оператор] Корзина має позитивний баланс.");
+                Console.WriteLine(config.PositiveBalance);
             }
 
-            Console.WriteLine("\n----- Оформлення доставки та оплати -----");
-            Console.Write("Введіть адресу доставки: ");
+            Console.WriteLine(config.CheckoutHeader);
+            Console.Write(config.AskAddress);
             string deliveryAddress = Console.ReadLine();
 
-            Console.WriteLine("\n[Доставка] Вартість транспортування за вказаною адресою становить +100 грн.");
+            Console.WriteLine(config.DeliveryCostInfo);
 
             Cart deliveryCart = client.Cart;
-            deliveryCart++; //  збільшуємо вартість кошика на 100 грн!
+            deliveryCart++; // збільшуємо вартість кошика на 100 грн!
 
-            Console.WriteLine($"Фінальна сума до сплати (з урахуванням доставки): {client.Cart.TotalPrice} грн");
+            Console.WriteLine($"{config.FinalPriceInfo}{client.Cart.TotalPrice}{config.Grn}");
 
-            Console.WriteLine("Виберіть спосіб оплати:");
-            Console.WriteLine("1 - Карткою на сайті");
-            Console.WriteLine("2 - Накладений платіж (при отриманні)");
-            Console.Write("Ваш вибір: ");
+            Console.WriteLine(config.PaymentMethodHeader);
+            Console.WriteLine(config.PaymentOption1);
+            Console.WriteLine(config.PaymentOption2);
+            Console.Write(config.EnterChoice);
             string paymentChoice = Console.ReadLine();
 
-            string paymentType = (paymentChoice == "1") ? "Картка" : "Накладений платіж";
-            Console.WriteLine($"Обрано спосіб: {paymentType}");
+            string paymentType = (paymentChoice == "1") ? config.PaymentTypeCard : config.PaymentTypePost;
+            Console.WriteLine($"{config.ChosenMethodInfo}{paymentType}");
 
             // Створюємо об'єкт оплати
             Payment payment = new Payment(client.Cart.TotalPrice, false);
@@ -166,11 +224,11 @@ namespace Project
             }
             else
             {
-                Console.WriteLine("[Оплата] Буде проведена при отриманні у відділенні.");
+                Console.WriteLine(config.PostPaymentInfo);
             }
 
             // Створюємо та запускаємо доставку
-            Delivery delivery = new Delivery(deliveryAddress, "Оформлено");
+            Delivery delivery = new Delivery(deliveryAddress, config.DeliveryStatus);
             delivery.Deliver();
 
             // Створюємо замовлення
@@ -181,7 +239,12 @@ namespace Project
             store.RegisterOrder(order);
             store.Manager.ControlOrders();
 
-            // 5. ЗБЕРЕЖЕННЯ ІСТОРІЇ КЛІЄНТА У ФАЙЛ
+            // ЗБЕРЕЖЕННЯ ІСТОРІЇ КЛІЄНТА У ФАЙЛ
+            SaveClientHistory(paymentType, payment, order, delivery);
+        }
+
+        static void SaveClientHistory(string paymentType, Payment payment, Order order, Delivery delivery)
+        {
             string clientsFolder = "Clients";
             if (!Directory.Exists(clientsFolder))
             {
@@ -191,39 +254,37 @@ namespace Project
             string clientFileName = $"{client.FullName.Replace(" ", "_")}_history.txt";
             string clientFilePath = Path.Combine(clientsFolder, clientFileName);
 
-            // Формуємо красивий чек для файлу історії покупця
+            // Формуємо гарний чек, тепер повністю підтягуючи назви полів з json конфігу
             List<string> historyLines = new List<string>
             {
-                $"=== ІСТОРІЯ ЗАМОВЛЕННЯ КЛІЄНТА ===",
-                $"Клієнт: {client.FullName}",
-                $"Телефон: {client.PhoneNumber}",
-                $"Дата оформлення: {DateTime.Now}",
-                $"---------------------------------",
-                $"Товари в замовленні:"
+                config.Haxor1,
+                $"{config.Haxor2}{client.FullName}",
+                $"{config.Haxor3}{client.PhoneNumber}",
+                $"{config.Haxor4}{DateTime.Now}",
+                config.Haxor5,
+                config.Haxor6
             };
 
             foreach (var prod in client.Cart.Products)
             {
-                historyLines.Add($"- {prod.Name} | {prod.Price} грн | {prod.Quantity} шт.");
+                historyLines.Add($"- {prod.Name} | {prod.Price}{config.Grn} | {prod.Quantity}{config.Sht}");
             }
 
-            historyLines.Add($"---------------------------------");
-            historyLines.Add($"Загальна вартість: {client.Cart.TotalPrice} грн");
-            historyLines.Add($"Спосіб оплати: {paymentType}");
-            historyLines.Add($"Статус оплати: {(payment.IsPaid ? "Оплачено" : "Накладений платіж")}");
-            historyLines.Add($"Номер ТТН доставки: {order.TrackingNumber}");
-            historyLines.Add($"Адреса доставки: {delivery.Address}");
-            historyLines.Add($"=================================");
-
+            historyLines.Add(config.Haxor5);
+            historyLines.Add($"{config.Haxor7}{client.Cart.TotalPrice}{config.Grn}");
+            historyLines.Add($"{config.Haxor8}{paymentType}");
+            historyLines.Add($"{config.Haxor9}{(payment.IsPaid ? config.Haxor10 : config.PaymentTypePost)}");
+            historyLines.Add($"{config.Haxor11}{order.TrackingNumber}");
+            historyLines.Add($"{config.Haxor12}{delivery.Address}");
+            historyLines.Add(config.Haxor13);
             historyLines.Add("");
             historyLines.Add("");
 
             File.AppendAllLines(clientFilePath, historyLines);
 
             Console.WriteLine();
-            Console.WriteLine($"[Успіх] Історію покупок клієнта збережено у файл: {clientFilePath}");
-            Console.WriteLine("Замовлення успішно оброблено системою!");
-            Console.WriteLine("Фініш імітації.");
+            Console.WriteLine($"{config.SuccessHistorySave}{clientFilePath}");
+            Console.WriteLine(config.SystemSuccess);
             Console.ReadLine();
         }
     }

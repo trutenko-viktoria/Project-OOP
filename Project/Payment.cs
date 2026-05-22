@@ -17,36 +17,31 @@ namespace Project
         {
             amount = 0;
             isPaid = false;
-
-           // Console.WriteLine("Конструктор без параметрів Payment");
         }
 
         public Payment(double amount, bool isPaid)
         {
             this.amount = amount;
             this.isPaid = isPaid;
-
-           // Console.WriteLine("Конструктор з параметрами Payment");
         }
 
         public Payment(Payment other)
         {
             amount = other.amount;
             isPaid = other.isPaid;
-
-           // Console.WriteLine("Конструктор копіювання Payment");
         }
 
         public void Pay()
         {
             isPaid = true;
-            Console.WriteLine("Товар оплачено");
+            Console.WriteLine(Program.config.PaymentDone);
         }
 
         public void ShowPaymentInfo()
         {
-            Console.WriteLine($"Сума оплати: {amount}");
-            Console.WriteLine($"Статус оплати: {(isPaid ? "оплачено" : "не оплачено")}");
+            // заміняємо весь текст на змінні з нашого json
+            Console.WriteLine($"{Program.config.PaymentAmountLabel}{amount}");
+            Console.WriteLine($"{Program.config.PaymentStatusLabel}{(isPaid ? Program.config.PaymentStatusPaid : Program.config.PaymentStatusNotPaid)}");
         }
     }
 }

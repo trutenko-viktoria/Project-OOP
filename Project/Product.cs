@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Project
 {
@@ -52,12 +48,7 @@ namespace Project
             set { color = value; }
         }
 
-        public Product(string name,
-    double price,
-    int quantity,
-    string description,
-    string size,
-    string color)
+        public Product(string name, double price, int quantity, string description, string size, string color)
         {
             this.name = name;
             this.price = price;
@@ -66,8 +57,6 @@ namespace Project
             this.description = description;
             this.size = size;
             this.color = color;
-
-           // Console.WriteLine("Конструктор з параметрами Product");
         }
 
         public Product(Product other)
@@ -79,33 +68,28 @@ namespace Project
             description = other.description;
             size = other.size;
             color = other.color;
-
-           // Console.WriteLine("Конструктор копіювання Product");
         }
 
-        //3 версія - булефі функції
+        // 3 версія - булеві функції
         public bool IsAvailable()
         {
             return quantity > 0;
         }
 
-        //3 версія - методи сценарію
+        // 3 версія - методи сценарію
         public bool CanBeAddedToCart()
         {
             if (IsAvailable())
             {
-                Console.WriteLine("Товар є в наявності");
+                Console.WriteLine(Program.config.ProductInStock);
                 return true;
             }
 
-            Console.WriteLine("Товар відсутній");
+            Console.WriteLine(Program.config.ProductOutOfStock);
             return false;
         }
-        //
 
-        //4 версія - перевантаження операторів
-        //ex: product1+product2=value
-
+        // 4 версія - перевантаження операторів
         public static bool operator ==(Product firstProduct, Product secondProduct)
         {
             if (ReferenceEquals(firstProduct, secondProduct))
@@ -126,25 +110,25 @@ namespace Project
             return !(firstProduct == secondProduct);
         }
 
-        public void ShowShortInfo() //коротка інфа для швидкого огляду асортименту
+        public void ShowShortInfo() // коротка інфа для швидкого огляду асортименту
         {
-            Console.WriteLine($"{name} - {price} грн");
+            Console.WriteLine($"{name}{Program.config.Separator}{price}{Program.config.Grn}");
         }
 
-        public void DecreaseQuantity() //зменшення кількості "в наявності"
+        public void DecreaseQuantity() // зменшення кількості "в наявності"
         {
             if (quantity > 0)
             {
                 quantity--;
-                Console.WriteLine("Кількість товару на складі зменшено");
+                Console.WriteLine(Program.config.ProductDecreased);
             }
             else
             {
-                Console.WriteLine("Товар відсутній на складі");
+                Console.WriteLine(Program.config.ProductWarehouseEmpty);
             }
         }
 
-        //v5
+        // v5
         public void ShowInfo()
         {
             ShowProductInfo();
@@ -152,12 +136,13 @@ namespace Project
 
         public void ShowProductInfo()
         {
-            Console.WriteLine($"Назва: {name}");
-            Console.WriteLine($"Опис: {description}");
-            Console.WriteLine($"Розмір: {size}");
-            Console.WriteLine($"Колір: {color}");
-            Console.WriteLine($"Ціна: {price} грн");
-            Console.WriteLine($"Кількість: {quantity}");
+            // заміняємо всі текстові назви полів на змінні з json
+            Console.WriteLine($"{Program.config.LabelName}{name}");
+            Console.WriteLine($"{Program.config.LabelDesc}{description}");
+            Console.WriteLine($"{Program.config.LabelSize}{size}");
+            Console.WriteLine($"{Program.config.LabelColor}{color}");
+            Console.WriteLine($"{Program.config.LabelPrice}{price}{Program.config.Grn}");
+            Console.WriteLine($"{Program.config.LabelQuantity}{quantity}");
         }
     }
 }

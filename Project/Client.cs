@@ -31,48 +31,44 @@ namespace Project
             fullName = "Невідомий клієнт";
             phoneNumber = "Не вказано";
             cart = new Cart();
-
-            // Console.WriteLine("Конструктор без параметрів Client");
         }
 
         public Client(string fullName, string phoneNumber, Cart cart)
          : base(fullName, phoneNumber)
         {
-            // ВИПРАВЛЕНО: тепер дані записуються і в локальні поля класу Client,
-            // щоб уникнути помилки NullReferenceException в Program.cs
+            // дані пишуться в локальні поля, щоб не було NullReferenceException
             this.fullName = fullName;
             this.phoneNumber = phoneNumber;
             this.cart = cart;
-
-            // Console.WriteLine("Конструктор з параметрами Client");
         }
 
         public void Register()
         {
-            //  Console.WriteLine($"Клієнт {fullName} зареєструвався");
         }
 
-        //3 версія - покращення даного методу сцеенарію у зв'язку з покращенням класу Product
+        // 3 версія - покращення даного методу сцеенарію у зв'язку з покращенням класу Product
         public void AddToCart(Product product)
         {
             if (product.CanBeAddedToCart())
             {
                 cart.AddProduct(product);
-                Console.WriteLine($"Клієнт {fullName} додав товар у корзину");
+                // витягуємо фразу успішного додавання з конфігу
+                Console.WriteLine($"{Program.config.Grn} '{fullName}' {Program.config.ClientAdded}");
             }
             else
             {
-                Console.WriteLine($"Клієнт {fullName} не зміг додати товар");
+                // витягуємо фразу помилки додавання з конфігу
+                Console.WriteLine($"{Program.config.Grn} '{fullName}' {Program.config.ClientFailedAdd}");
             }
         }
-        //
-        
+
         public override void ShowUserRole()
         {
-            Console.WriteLine($"[Система авторизації] Користувач увійшов у профіль як: КЛІЄНТ.");
+            // роль беремо з json
+            Console.WriteLine(Program.config.ClientRole);
         }
 
-        //V5
+        // V5
         public void ShowInfo()
         {
             ShowClientInfo();
@@ -80,10 +76,10 @@ namespace Project
 
         public void ShowClientInfo()
         {
-            Console.WriteLine($"Клієнт: {fullName}");
-            Console.WriteLine($"Телефон: {phoneNumber}");
+            // повна заміна тексту на змінні з json
+            Console.WriteLine($"{Program.config.ClientLabel}{fullName}");
+            Console.WriteLine($"{Program.config.PhoneLabel}{phoneNumber}");
             cart.ShowCartInfo();
         }
-
     }
 }

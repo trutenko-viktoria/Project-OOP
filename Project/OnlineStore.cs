@@ -21,8 +21,6 @@ namespace Project
             products = new List<Product>();
             orders = new List<Order>();
             manager = new Manager();
-
-           // Console.WriteLine("Конструктор без параметрів OnlineStore");
         }
 
         public OnlineStore(List<Product> products, List<Order> orders, Manager manager)
@@ -30,39 +28,35 @@ namespace Project
             this.products = products;
             this.orders = orders;
             this.manager = manager;
-
-           // Console.WriteLine("Конструктор з параметрами OnlineStore");
         }
 
         public void OpenStore()
         {
-            Console.WriteLine("Інтернет-магазин працює");
+            Console.WriteLine(Program.config.StoreOpen);
         }
 
-        //3 версія
-        //Предикатні методи
+        // 3 версія
+        // Предикатні методи
         public bool HasOrders()
         {
             return orders.Count > 0;
         }
 
-        //Методи сценарію
+        // Методи сценарію
         public void RegisterOrder(Order order)
         {
             if (order != null)
             {
                 orders.Add(order);
-                Console.WriteLine("Замовлення зареєстровано в системі магазину");
+                Console.WriteLine(Program.config.OrderRegistered);
             }
             else
             {
-                Console.WriteLine("Замовлення не створено");
+                Console.WriteLine(Program.config.OrderNotCreated);
             }
         }
-        //
 
-        //5 версія
-
+        // 5 версія
         public void LoadProductsFromFile(string filePath)
         {
             products.Clear();
@@ -84,10 +78,10 @@ namespace Project
                 products.Add(product);
             }
 
-            Console.WriteLine("Каталог товарів завантажено з файлу");
+            Console.WriteLine(Program.config.ProductsLoaded);
         }
 
-        //5
+        // 5 версія
         public void SaveProductsToFile(string filePath)
         {
             List<string> lines = new List<string>();
@@ -107,12 +101,12 @@ namespace Project
 
             File.WriteAllLines(filePath, lines);
 
-            Console.WriteLine("Каталог товарів оновлено");
+            Console.WriteLine(Program.config.ProductsSaved);
         }
 
         public void ShowCatalog()
         {
-            Console.WriteLine("===== Каталог товарів =====");
+            Console.WriteLine(Program.config.CatalogHeader);
 
             for (int i = 0; i < products.Count; i++)
             {
@@ -123,7 +117,7 @@ namespace Project
             Console.WriteLine();
         }
 
-        //4 версія
+        // 4 версія
         public void ShowProductDetails(int index)
         {
             if (index >= 0 && index < products.Count)
@@ -132,7 +126,7 @@ namespace Project
             }
             else
             {
-                Console.WriteLine("Товар не знайдено");
+                Console.WriteLine(Program.config.ProductNotFound);
             }
         }
 
@@ -145,6 +139,5 @@ namespace Project
 
             return null;
         }
-        //
     }
 }

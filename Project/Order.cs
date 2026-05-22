@@ -20,8 +20,6 @@ namespace Project
             orderNumber = 0;
             payment = new Payment();
             delivery = new Delivery();
-
-            // Console.WriteLine("Конструктор без параметрів Order");
         }
 
         public Order(int orderNumber, Payment payment, Delivery delivery)
@@ -30,18 +28,16 @@ namespace Project
             this.payment = payment;
             this.delivery = delivery;
             trackingNumber = GenerateTrackingNumber();
-
-            // Console.WriteLine("Конструктор з параметрами Order");
         }
 
         private string GenerateTrackingNumber()
         {
             Random random = new Random();
-
-            return "TTN-" + random.Next(100000, 999999);
+            // префікс ТТН тепер береться з конфігу
+            return Program.config.TtnPrefix + random.Next(100000, 999999);
         }
 
-        //3 версія - булеві
+        // 3 версія - булеві
         public bool IsPaidOrder()
         {
             return payment.IsPaid;
@@ -51,18 +47,20 @@ namespace Project
         {
             return delivery != null;
         }
-        //3 версія -Box методи сценарію
+
+        // 3 версія - методи сценарію
         public void ConfirmOrder()
         {
             if (IsPaidOrder() && HasDelivery())
             {
-                Console.WriteLine($"Замовлення №{orderNumber} підтверджено");
+                // збираємо рядок підтвердження через json змінні
+                Console.WriteLine($"{Program.config.OrderConfirmedPrefix}{orderNumber}{Program.config.OrderConfirmedSuffix}");
             }
             else
             {
-                Console.WriteLine($"Замовлення №{orderNumber} не можна підтвердити");
+                // збираємо рядок помилки через json змінні
+                Console.WriteLine($"{Program.config.OrderConfirmedPrefix}{orderNumber}{Program.config.OrderNotConfirmedSuffix}");
             }
         }
-        //
     }
 }

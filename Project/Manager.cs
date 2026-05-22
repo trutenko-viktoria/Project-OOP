@@ -11,38 +11,33 @@ namespace Project
         {
             processedOrdersCount = 0;
         }
-        // Console.WriteLine("Конструктор без параметрів Manager");
-
 
         public Manager(string fullName, int processedOrdersCount)
         : base(fullName, "Не вказано")
         {
-            // ВИПРАВЛЕНО: Явно записуємо ім'я в protected поле базового класу
+            // Явно записуємо ім'я в protected поле базового класу
             // щоб метод ShowManagerInfo() бачив його в консолі
             this.fullName = fullName;
             this.processedOrdersCount = processedOrdersCount;
-
-            // Console.WriteLine("Конструктор з параметрами Manager");
         }
 
         public void ControlOrders()
         {
             processedOrdersCount++;
-            Console.WriteLine("Менеджер контролює замовлення");
+            Console.WriteLine(Program.config.ManagerControl);
         }
 
         public void ReplaceProduct()
         {
-            Console.WriteLine("Менеджер узгоджує заміну товару з клієнтом");
+            Console.WriteLine(Program.config.ManagerReplace);
         }
 
-        //V5
+        // V5
         public override void ShowUserRole()
         {
-            // МОДЕРНІЗОВАНО: тепер вивід інтегрований у бізнес-процес магазину
-            Console.WriteLine($"[Авторизація] Працівник {fullName} увійшов у систему з роллю: МЕНЕДЖЕР.");
+            // МОДЕРНІЗОВАНО: збираємо рядок докупи з частинок у json
+            Console.WriteLine($"{Program.config.ManagerAuthPrefix}{fullName}{Program.config.ManagerAuthSuffix}");
         }
-        //
 
         // Реалізація методу інтерфейсу IShowInfo
         public void ShowInfo()
@@ -52,9 +47,8 @@ namespace Project
 
         public void ShowManagerInfo()
         {
-            Console.WriteLine($"Менеджер: {fullName}");
-            Console.WriteLine($"Кількість оброблених замовлень: {processedOrdersCount}");
+            Console.WriteLine($"{Program.config.ManagerLabel}{fullName}");
+            Console.WriteLine($"{Program.config.ManagerOrdersCount}{processedOrdersCount}");
         }
-
     }
 }
