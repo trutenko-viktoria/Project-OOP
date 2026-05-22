@@ -142,6 +142,13 @@ namespace Project
             Console.Write("Введіть адресу доставки: ");
             string deliveryAddress = Console.ReadLine();
 
+            Console.WriteLine("\n[Доставка] Вартість транспортування за вказаною адресою становить +100 грн.");
+
+            Cart deliveryCart = client.Cart;
+            deliveryCart++; //  збільшуємо вартість кошика на 100 грн!
+
+            Console.WriteLine($"Фінальна сума до сплати (з урахуванням доставки): {client.Cart.TotalPrice} грн");
+
             Console.WriteLine("Виберіть спосіб оплати:");
             Console.WriteLine("1 - Карткою на сайті");
             Console.WriteLine("2 - Накладений платіж (при отриманні)");
