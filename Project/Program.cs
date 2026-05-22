@@ -215,7 +215,10 @@ namespace Project
             historyLines.Add($"Адреса доставки: {delivery.Address}");
             historyLines.Add($"=================================");
 
-            File.WriteAllLines(clientFilePath, historyLines);
+            historyLines.Add("");
+            historyLines.Add("");
+
+            File.AppendAllLines(clientFilePath, historyLines);
 
             Console.WriteLine();
             Console.WriteLine($"[Успіх] Історію покупок клієнта збережено у файл: {clientFilePath}");
