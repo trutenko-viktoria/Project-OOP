@@ -26,16 +26,6 @@ namespace Project
             private set { cart = value; }
         }
 
-        static Client()
-        {
-            //  Console.WriteLine("Статичний конструктор Client");
-        }
-
-        private Client(bool isHidden)
-        {
-            // Console.WriteLine("Закритий конструктор Client");
-        }
-
         public Client()
         {
             fullName = "Невідомий клієнт";
@@ -57,22 +47,6 @@ namespace Project
             // Console.WriteLine("Конструктор з параметрами Client");
         }
 
-        public Client(Client other)
-        {
-            fullName = other.fullName;
-            phoneNumber = other.phoneNumber;
-            cart = new Cart(other.cart);
-
-            // Console.WriteLine("Конструктор копіювання Client");
-        }
-
-        public Client(string fullName) : this()
-        {
-            this.fullName = fullName;
-
-            // Console.WriteLine("Конструктор з викликом іншого конструктора Client");
-        }
-
         public void Register()
         {
             //  Console.WriteLine($"Клієнт {fullName} зареєструвався");
@@ -92,33 +66,7 @@ namespace Project
             }
         }
         //
-        //3 версія - методи сценарію
-
-        public void MakeOrder()
-        {
-            if (cart.CanCreateOrder())
-            {
-                Console.WriteLine($"Клієнт {fullName} оформив замовлення");
-            }
-            else
-            {
-                Console.WriteLine($"Клієнт {fullName} не може оформити замовлення");
-            }
-        }
-        // зміни в мейн не додаю, бо він там вже є, наразі я просто його покращую
-
-        //3 версія - булеві
-        public bool HasCart()
-        {
-            return cart != null;
-        }
-
-        public bool HasPhoneNumber()
-        {
-            return phoneNumber != "Не вказано";
-        }
-        //
-
+        
         public override void ShowUserRole()
         {
             Console.WriteLine($"[Система авторизації] Користувач увійшов у профіль як: КЛІЄНТ.");

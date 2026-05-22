@@ -20,45 +20,12 @@ namespace Project
             private set { totalPrice = value; }
         }
 
-        static Cart()
-        {
-         //   Console.WriteLine("Статичний конструктор Cart");
-        }
-
-        private Cart(bool isHidden)
-        {
-          //  Console.WriteLine("Закритий конструктор Cart");
-        }
-
         public Cart()
         {
             products = new List<Product>();
             totalPrice = 0;
 
            // Console.WriteLine("Конструктор без параметрів Cart");
-        }
-
-        public Cart(List<Product> products, double totalPrice)
-        {
-            this.products = products;
-            this.totalPrice = totalPrice;
-
-           // Console.WriteLine("Конструктор з параметрами Cart");
-        }
-
-        public Cart(Cart other)
-        {
-            products = new List<Product>(other.products);
-            totalPrice = other.totalPrice;
-
-           // Console.WriteLine("Конструктор копіювання Cart");
-        }
-
-        public Cart(List<Product> products) : this()
-        {
-            this.products = products;
-
-           // Console.WriteLine("Конструктор з викликом іншого конструктора Cart");
         }
 
         public void AddProduct(Product product)
@@ -88,20 +55,6 @@ namespace Project
         public bool HasExpensiveTotal()
         {
             return totalPrice > 20000;
-        }
-        //
-
-        //3 версія - методи сценарію
-        public bool CanCreateOrder()
-        {
-            if (IsEmpty())
-            {
-                Console.WriteLine("Замовлення неможливо оформити, бо корзина порожня");
-                return false;
-            }
-
-            Console.WriteLine("Корзина не порожня, замовлення можна оформити");
-            return true;
         }
         //
 

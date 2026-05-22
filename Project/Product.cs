@@ -52,16 +52,6 @@ namespace Project
             set { color = value; }
         }
 
-        static Product()
-        {
-           // Console.WriteLine("Статичний конструктор Product");
-        }
-
-        private Product(bool secret)
-        {
-          //  Console.WriteLine("Закритий конструктор Product");
-        }
-
         public Product(string name,
     double price,
     int quantity,
@@ -80,20 +70,6 @@ namespace Project
            // Console.WriteLine("Конструктор з параметрами Product");
         }
 
-        //ТИМЧАСОВА ШТУКА ДЛЯ КОМПІЛЯЦІЇ БО ВИРІШЕНО РОБИТИ КАТАЛОГ В TXT
-        public Product(string name, double price, int quantity)
-        {
-            this.name = name;
-            this.price = price;
-            this.quantity = quantity;
-
-            description = "Опис відсутній";
-            size = "Не вказано";
-            color = "Не вказано";
-
-           // Console.WriteLine("Конструктор з параметрами Product");
-        }
-
         public Product(Product other)
         {
             name = other.name;
@@ -107,36 +83,12 @@ namespace Project
            // Console.WriteLine("Конструктор копіювання Product");
         }
 
-        public Product(string name) : this()
-        {
-            this.name = name;
-
-           // Console.WriteLine("Конструктор з викликом іншого конструктора Product");
-        }
-
-        public Product()
-        {
-            name = "Невідомий товар";
-            price = 0;
-            quantity = 0;
-
-            description = "Опис відсутній";
-            size = "Не вказано";
-            color = "Не вказано";
-
-          //  Console.WriteLine("Конструктор без параметрів Product");
-        }
-
         //3 версія - булефі функції
         public bool IsAvailable()
         {
             return quantity > 0;
         }
 
-        public bool IsExpensive()
-        {
-            return price > 10000;
-        }
         //3 версія - методи сценарію
         public bool CanBeAddedToCart()
         {
@@ -153,10 +105,6 @@ namespace Project
 
         //4 версія - перевантаження операторів
         //ex: product1+product2=value
-        public static double operator +(Product firstProduct, Product secondProduct)
-        {
-            return firstProduct.price + secondProduct.price;
-        }
 
         public static bool operator ==(Product firstProduct, Product secondProduct)
         {
@@ -177,17 +125,6 @@ namespace Project
         {
             return !(firstProduct == secondProduct);
         }
-
-        public static bool operator >(Product firstProduct, Product secondProduct)
-        {
-            return firstProduct.price > secondProduct.price;
-        }
-
-        public static bool operator <(Product firstProduct, Product secondProduct)
-        {
-            return firstProduct.price < secondProduct.price;
-        }
-        //
 
         public void ShowShortInfo() //коротка інфа для швидкого огляду асортименту
         {

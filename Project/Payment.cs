@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Project
 {
@@ -11,26 +7,10 @@ namespace Project
         private double amount;
         private bool isPaid;
 
-        public double Amount
-        {
-            get { return amount; }
-            set { amount = value; }
-        }
-
         public bool IsPaid
         {
             get { return isPaid; }
             private set { isPaid = value; }
-        }
-
-        static Payment()
-        {
-           // Console.WriteLine("Статичний конструктор Payment");
-        }
-
-        private Payment(bool isHidden)
-        {
-           // Console.WriteLine("Закритий конструктор Payment");
         }
 
         public Payment()
@@ -57,50 +37,11 @@ namespace Project
            // Console.WriteLine("Конструктор копіювання Payment");
         }
 
-        public Payment(double amount) : this()
-        {
-            this.amount = amount;
-
-           // Console.WriteLine("Конструктор з викликом іншого конструктора Payment");
-        }
-
         public void Pay()
         {
             isPaid = true;
             Console.WriteLine("Товар оплачено");
         }
-
-        //3 версія - булеві 
-        public bool IsPaymentCompleted()
-        {
-            return isPaid;
-        }
-
-        public bool IsLargePayment()
-        {
-            return amount > 20000;
-        }
-        //3 версія - сценарію
-        public void CancelPayment()
-        {
-            if (isPaid)
-            {
-                isPaid = false;
-                Console.WriteLine("Оплату скасовано");
-            }
-            else
-            {
-                Console.WriteLine("Оплата ще не була виконана");
-            }
-        }
-        //
-
-        //4 версія- оператори
-        public static bool operator !(Payment payment)
-        {
-            return !payment.isPaid;
-        }
-        //
 
         public void ShowPaymentInfo()
         {

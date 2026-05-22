@@ -15,34 +15,6 @@ namespace Project
             set { trackingNumber = value; }
         }
 
-        public int OrderNumber
-        {
-            get { return orderNumber; }
-            set { orderNumber = value; }
-        }
-
-        public Payment Payment
-        {
-            get { return payment; }
-            private set { payment = value; }
-        }
-
-        public Delivery Delivery
-        {
-            get { return delivery; }
-            private set { delivery = value; }
-        }
-
-        static Order()
-        {
-            //  Console.WriteLine("Статичний конструктор Order");
-        }
-
-        private Order(bool isHidden)
-        {
-            // Console.WriteLine("Закритий конструктор Order");
-        }
-
         public Order()
         {
             orderNumber = 0;
@@ -62,39 +34,11 @@ namespace Project
             // Console.WriteLine("Конструктор з параметрами Order");
         }
 
-        public Order(Order other)
-        {
-            orderNumber = other.orderNumber;
-            payment = new Payment(other.payment);
-            delivery = new Delivery(other.delivery);
-            // ВИПРАВЛЕНО: Додано копіювання ТТН, щоб воно не втрачалося при копіюванні об'єкта
-            trackingNumber = other.trackingNumber;
-
-            // Console.WriteLine("Конструктор копіювання Order");
-        }
-
-        public Order(int orderNumber) : this()
-        {
-            this.orderNumber = orderNumber;
-
-            // Console.WriteLine("Конструктор з викликом іншого конструктора Order");
-        }
-
         private string GenerateTrackingNumber()
         {
             Random random = new Random();
 
             return "TTN-" + random.Next(100000, 999999);
-        }
-
-        public void RegisterOrder()
-        {
-            Console.WriteLine($"Замовлення №{orderNumber} зареєстровано");
-        }
-
-        public void CompleteOrder()
-        {
-            Console.WriteLine($"Замовлення №{orderNumber} скомпоновано");
         }
 
         //3 версія - булеві
@@ -120,26 +64,5 @@ namespace Project
             }
         }
         //
-
-        //4 версія - оператори
-        public static bool operator >=(Order firstOrder, Order secondOrder)
-        {
-            return firstOrder.orderNumber >= secondOrder.orderNumber;
-        }
-
-        public static bool operator <=(Order firstOrder, Order secondOrder)
-        {
-            return firstOrder.orderNumber <= secondOrder.orderNumber;
-        }
-        //
-
-        public void ShowOrderInfo()
-        {
-            Console.WriteLine($"Номер замовлення: {orderNumber}");
-
-            payment.ShowPaymentInfo();
-            delivery.ShowDeliveryInfo();
-            Console.WriteLine($"ТТН: {trackingNumber}");
-        }
     }
 }
