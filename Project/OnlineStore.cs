@@ -16,13 +16,6 @@ namespace Project
             set { manager = value; }
         }
 
-        public OnlineStore()
-        {
-            products = new List<Product>();
-            orders = new List<Order>();
-            manager = new Manager();
-        }
-
         public OnlineStore(List<Product> products, List<Order> orders, Manager manager)
         {
             this.products = products;
@@ -33,13 +26,6 @@ namespace Project
         public void OpenStore()
         {
             Console.WriteLine(Program.config.StoreOpen);
-        }
-
-        // 3 версія
-        // Предикатні методи
-        public bool HasOrders()
-        {
-            return orders.Count > 0;
         }
 
         // Методи сценарію

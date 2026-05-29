@@ -13,22 +13,10 @@ namespace Project
             private set { isPaid = value; }
         }
 
-        public Payment()
-        {
-            amount = 0;
-            isPaid = false;
-        }
-
         public Payment(double amount, bool isPaid)
         {
             this.amount = amount;
             this.isPaid = isPaid;
-        }
-
-        public Payment(Payment other)
-        {
-            amount = other.amount;
-            isPaid = other.isPaid;
         }
 
         public void Pay()

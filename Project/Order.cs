@@ -15,13 +15,6 @@ namespace Project
             set { trackingNumber = value; }
         }
 
-        public Order()
-        {
-            orderNumber = 0;
-            payment = new Payment();
-            delivery = new Delivery();
-        }
-
         public Order(int orderNumber, Payment payment, Delivery delivery)
         {
             this.orderNumber = orderNumber;

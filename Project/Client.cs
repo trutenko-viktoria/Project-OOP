@@ -26,13 +26,6 @@ namespace Project
             private set { cart = value; }
         }
 
-        public Client()
-        {
-            fullName = "Невідомий клієнт";
-            phoneNumber = "Не вказано";
-            cart = new Cart();
-        }
-
         public Client(string fullName, string phoneNumber, Cart cart)
          : base(fullName, phoneNumber)
         {

@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
 
 namespace Project
@@ -6,8 +6,8 @@ namespace Project
     // Робимо клас публічним та окремим, щоб його бачили всі файли в проєкті
     public class AppConfig
     {
-        public string StudentName { get; set; }
-        public string StudentGroup { get; set; }
+        public string Identification1 { get; set; }
+        public string Identification2 { get; set; }
         public string WelcomeMessage { get; set; }
         public string RegHeader { get; set; }
         public string AskName { get; set; }

@@ -59,8 +59,8 @@ namespace Project
 
         static void ShowStudentInfo()
         {
-            Console.WriteLine("ПІБ студента: Трутенко Вікторія Миколаївна");
-            Console.WriteLine("Курс: 1 | Група: ІПЗ-11 | Варіант: 45");
+            Console.WriteLine(config.Identification1);
+            Console.WriteLine(config.Identification2);
             Console.WriteLine(config.WelcomeMessage);
             Console.WriteLine();
         }
